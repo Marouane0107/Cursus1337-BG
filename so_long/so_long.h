@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 00:35:51 by maouzal           #+#    #+#             */
-/*   Updated: 2023/02/09 17:21:05 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/02/26 17:20:44 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_data
 	void	*mlx_win;
 	void	*player;
 	void	*wall;
-	void	*enemy;
 	void	*ring;
 	void	*exit;
 	void	*grass;
@@ -43,7 +42,7 @@ typedef struct s_data
 	int		c;
 	int		e;
 	int		p;
-}			t_data;
+}		t_data;
 
 void		exit_right(int i, int j, t_data *p);
 void		exit_left(int i, int j, t_data *p);

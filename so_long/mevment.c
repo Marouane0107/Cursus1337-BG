@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:44:47 by maouzal           #+#    #+#             */
-/*   Updated: 2023/02/11 17:55:40 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/02/26 17:21:36 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,10 +144,7 @@ int	move(int k, t_data *p)
 	if (k == 125)
 		move_down(p, i, j);
 	if (k == 53)
-	{
-		free(p);
 		exit(0);
-	}
 	loop_emage(p, 0, 0);
 	return (k);
 }

@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 03:56:40 by maouzal           #+#    #+#             */
-/*   Updated: 2023/02/11 18:05:18 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/02/26 17:19:54 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	check_map_characters(t_data *p)
 		{
 			if (p->map[i][j] != '1' && p->map[i][j] != '0' &&
 				p->map[i][j] != 'C' && p->map[i][j] != 'P' &&
-				p->map[i][j] != 'E' && p->map[i][j] != 'X')
+				p->map[i][j] != 'E')
 			{
 				write(2, "Error\nThe map most only conten these (C,P,E,0,1)",
 					49);

@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:47:20 by maouzal           #+#    #+#             */
-/*   Updated: 2023/02/12 15:04:47 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/02/26 17:20:26 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ void	put_emages(t_data *p)
 		exit(1);
 	p->exit = mlx_xpm_file_to_image(p->mlx, "./textures/exit1.xpm", &x, &y);
 	if (!p->exit)
-		exit(1);
-	p->enemy = mlx_xpm_file_to_image(p->mlx, "./textures/Fire.xpm", &x, &y);
-	if (!p->enemy)
 		exit(1);
 	p->grass = mlx_xpm_file_to_image(p->mlx, "./textures/black.xpm", &x, &y);
 	if (!p->grass)

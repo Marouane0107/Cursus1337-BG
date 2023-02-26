@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 01:24:31 by maouzal           #+#    #+#             */
-/*   Updated: 2023/02/11 19:22:37 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/02/26 17:22:06 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ void	struct_init(t_data *s)
 	s->e = 0;
 }
 
-int	leave(t_data *p)
+int	leave(void)
 {
-	free(p);
 	exit(0);
 	return (0);
 }
