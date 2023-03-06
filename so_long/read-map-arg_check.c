@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:37:42 by maouzal           #+#    #+#             */
-/*   Updated: 2023/02/11 18:13:56 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/03/06 21:44:41 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	check_arg(int argc, char *argv)
 	}
 	x = ft_strlen(argv);
 	x--;
-	if (argv[x] != 'r' && argv[x - 1] != 'e' && argv[x - 2] != 'b' && argv[x
+	if (argv[x] != 'r' || argv[x - 1] != 'e' || argv[x - 2] != 'b' || argv[x
 			- 3] != '.')
 	{
 		write(2, "Error\nUnvalide map (.ber)!", 27);
