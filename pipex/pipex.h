@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:13:54 by maouzal           #+#    #+#             */
-/*   Updated: 2023/03/17 16:55:26 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/03/23 23:40:39 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+#include <sys/wait.h>
 
 typedef struct s_data
 {
@@ -33,5 +34,7 @@ char			**ft_split(char const *s, char c);
 char			*ft_strdup(const char *s1);
 void			path(t_data *p, char *av[]);
 void			cmd_path(t_data *p, char **cmd);
+char			*ft_strchr(const char *s, int c);
+void			cmd_check(char *av, t_data *p, char **cmd);
 
 #endif
