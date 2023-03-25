@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:52:04 by maouzal           #+#    #+#             */
-/*   Updated: 2023/03/23 23:44:15 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/03/25 07:59:24 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ void	cmd_path(t_data *p, char **cmd)
 		path_cmd = ft_strjoin(cmd_part, cmd[0]);
 		if (access(path_cmd, X_OK) == -1)
 			free(path_cmd);
-		else if(execve(path_cmd, cmd, p->env) == -1)
+		else if (execve(path_cmd, cmd, p->env) == -1)
 		{
 			perror("command not found");
 			exit(127);
 		}
 		i++;
 	}
-	write (2 , *cmd, ft_strlen(*cmd));
-	write (2, ": command not found\n", 21);
+	write(2, *cmd, ft_strlen(*cmd));
+	write(2, ": command not found\n", 21);
 	exit(127);
 }
 
@@ -80,5 +80,14 @@ void	cmd_check(char *av, t_data *p, char **cmd)
 			perror("command not found");
 			exit(127);
 		}
+	}
+}
+
+void	arg_check(int ac)
+{
+	if (ac != 5)
+	{
+		write(2, "Error invalid number of arguments!", 35);
+		exit(1);
 	}
 }
