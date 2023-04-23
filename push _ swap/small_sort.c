@@ -6,7 +6,7 @@
 /*   By: docentennm <docentennm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 00:25:55 by maouzal           #+#    #+#             */
-/*   Updated: 2023/04/23 19:11:26 by docentennm       ###   ########.fr       */
+/*   Updated: 2023/04/23 20:02:49 by docentennm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void    sort_two_three(t_stack **stack_a)
     tmp = stack_end(*stack_a);
     c = tmp->data; 
     if ((a > b && a < c) || (b == c))
+    {
+        write(1,"how!!\n", 6);
         swap_a((*stack_a));
+    }
     else if (a > b && a > c && b > c)
     {
         swap_a((*stack_a));
@@ -126,7 +129,7 @@ void    sort_four(t_stack **stack_a, t_stack **stack_b, t_vr *p)
 void    sort_five(t_stack **stack_a, t_stack **stack_b, t_vr *p)
 {
     push_b(stack_a, stack_b);
-    sort_four(stack_a, stack_a, p);
+    sort_four(stack_a, stack_b, p);
     git_index(stack_a, stack_b, p);
     adding_five_a(stack_a, stack_b, p);
 }
