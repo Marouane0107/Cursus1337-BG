@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maouzal <maouzal>                          +#+  +:+       +#+        */
+/*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/10 20:41:48 by maouzal           #+#    #+#             */
-/*   Updated: 2023/04/20 04:54:18 by maouzal          ###   ########.fr       */
+/*   Created: 2023/04/24 01:26:18 by maouzal           #+#    #+#             */
+/*   Updated: 2023/04/25 10:51:23 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,3 @@ void    erray_alloction(char *argv[], t_vr *p)
     if (!p->holder)
         return;
 }
-
-// void    max_min(t_vr *p, t_stack **stack_a)
-// {
-//     int i;
-
-//     i = 0;
-//     p->max = p->holder[0];
-//     p->min = p->holder[0];
-//     while (i < p->len)
-//     {
-//         if (p->holder[i] > p->max)
-//             p->max = p->holder[i];
-//         if (p->holder[i] < p->min)
-//             p->min = p->holder[i];
-//         i++;
-//     }
-// }

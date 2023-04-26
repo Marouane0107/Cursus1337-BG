@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maouzal <maouzal>                          +#+  +:+       +#+        */
+/*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/02 08:55:34 by maouzal           #+#    #+#             */
-/*   Updated: 2023/04/18 17:37:21 by maouzal          ###   ########.fr       */
+/*   Created: 2023/04/24 01:25:31 by maouzal           #+#    #+#             */
+/*   Updated: 2023/04/25 10:48:12 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void    check_int(char  *str)
         ft_Error();
     }
 }
-
 
 void    is_digit(char *str)
 {
@@ -41,7 +40,6 @@ void    is_digit(char *str)
         i++;
     }
 }
-
 
 void    check_numbers(char *argv[], t_vr *p)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations_rev_rotat.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: docentennm <docentennm@student.42.fr>      +#+  +:+       +#+        */
+/*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/10 20:41:44 by maouzal           #+#    #+#             */
-/*   Updated: 2023/04/23 18:02:52 by docentennm       ###   ########.fr       */
+/*   Created: 2023/04/24 01:25:00 by maouzal           #+#    #+#             */
+/*   Updated: 2023/04/26 17:24:40 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void    revrotat_a(t_stack **stack_a)
     t_stack *new_head;
     t_stack *tmp2;
 
-    if (!(*stack_a))
+    if (!(*stack_a)->next)
         return;
     tmp2 = (*stack_a);
     while(tmp2->next->next != NULL)
@@ -35,7 +35,7 @@ void    revrotat_b(t_stack **stack_b)
     t_stack *new_head;
     t_stack *tmp2;
 
-    if (!(*stack_b))
+    if (!(*stack_b)->next)
         return;
     tmp2 = (*stack_b);
     while(tmp2->next->next != NULL)

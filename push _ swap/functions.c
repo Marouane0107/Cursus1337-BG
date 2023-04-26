@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   functions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: docentennm <docentennm@student.42.fr>      +#+  +:+       +#+        */
+/*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/23 19:04:14 by docentennm        #+#    #+#             */
-/*   Updated: 2023/04/23 19:07:45 by docentennm       ###   ########.fr       */
+/*   Created: 2023/04/24 01:24:06 by maouzal           #+#    #+#             */
+/*   Updated: 2023/04/25 10:40:44 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int static	ft_maxlong(const char *str, long x, long res, long w)
+static long	ft_maxlong(const char *str, long x, long res, long w)
 {
 	while (str[x] >= '0' && str[x] <= '9')
 	{
@@ -29,7 +29,7 @@ int static	ft_maxlong(const char *str, long x, long res, long w)
 	return (res * w);
 }
 
-int	ft_atoi(const char	*str)
+long	ft_atoi(const char	*str)
 {
 	long	x;
 	long	w;

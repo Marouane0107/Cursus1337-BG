@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   small_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: docentennm <docentennm@student.42.fr>      +#+  +:+       +#+        */
+/*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/17 00:25:55 by maouzal           #+#    #+#             */
-/*   Updated: 2023/04/23 20:02:49 by docentennm       ###   ########.fr       */
+/*   Created: 2023/04/24 01:23:02 by maouzal           #+#    #+#             */
+/*   Updated: 2023/04/24 01:23:43 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ void    sort_two_three(t_stack **stack_a)
     tmp = stack_end(*stack_a);
     c = tmp->data; 
     if ((a > b && a < c) || (b == c))
-    {
-        write(1,"how!!\n", 6);
         swap_a((*stack_a));
-    }
     else if (a > b && a > c && b > c)
     {
         swap_a((*stack_a));
@@ -45,78 +42,6 @@ void    sort_two_three(t_stack **stack_a)
 }
 
 
-void    git_index(t_stack **stack_a, t_stack **stack_b, t_vr *p)
-{
-    t_stack *tmp;
-    
-    tmp = (*stack_a);
-    p->index = 0;
-    while (tmp)
-    {
-        if ((*stack_b)->data > tmp->data)
-            p->index++;
-        tmp = tmp->next;
-    }
-}
-
-void    adding_four_a(t_stack **stack_a, t_stack **stack_b, t_vr *p)
-{
-    if (p->index == 0)
-        push_a(stack_a, stack_b);
-    else if (p->index == 1)
-    {
-        push_a(stack_a, stack_b);
-        swap_a((*stack_a));
-    }
-    else if (p->index == 2)
-    {
-        push_a(stack_a, stack_b);
-        revrotat_a(stack_a);
-        swap_a((*stack_a));
-        rotat_a(stack_a);
-        rotat_a(stack_a);
-    }
-    else if (p->index == 3)
-    {
-        push_a(stack_a, stack_b);
-        rotat_a(stack_a);
-    }
-}
-
-void    adding_five_a(t_stack **stack_a, t_stack **stack_b, t_vr *p)
-{
-    if (p->index == 0)
-        push_a(stack_a, stack_b);
-    else if (p->index == 1)
-    {
-        push_a(stack_a, stack_b);
-        swap_a((*stack_a));
-    }
-    else if (p->index == 2)
-    {
-        push_a(stack_a, stack_b);
-        revrotat_a(stack_a);
-        swap_a((*stack_a));
-        revrotat_a(stack_a);
-        swap_a((*stack_a));
-        rotat_a(stack_a);
-        rotat_a(stack_a);
-        rotat_a(stack_a);
-    }
-    else if (p->index == 3)
-    {
-        push_a(stack_a, stack_b);
-        revrotat_a(stack_a);
-        swap_a((*stack_a));
-        rotat_a(stack_a);
-        rotat_a(stack_a);
-    }
-    else if (p->index == 4)
-    {
-        push_a(stack_a, stack_b);
-        rotat_a(stack_a);
-    }
-}
 
 void    sort_four(t_stack **stack_a, t_stack **stack_b, t_vr *p)
 {   
