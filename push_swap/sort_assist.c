@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 01:26:06 by maouzal           #+#    #+#             */
-/*   Updated: 2023/05/15 02:47:30 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/05/17 00:58:26 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	git_index(t_stack **stack_a, t_stack **stack_b, t_vr *p)
 {
 	t_stack	*tmp;
 
+	if (!(*stack_a) || !(*stack_b))
+		return ;
 	tmp = (*stack_a);
 	p->index = 0;
 	while (tmp)
@@ -39,6 +41,12 @@ void	adding_four_a(t_stack **stack_a, t_stack **stack_b, t_vr *p)
 	{
 		revrotat_a(stack_a);
 		push_a(stack_a, stack_b);
+		if ((*stack_a)->data > (*stack_b)->data
+			&& (*stack_b)->data > last_a(stack_a))
+		{
+			push_a(stack_a, stack_b);
+			rotat_a(stack_a);
+		}
 		rotat_a(stack_a);
 		rotat_a(stack_a);
 	}
@@ -63,6 +71,8 @@ void	index_two(t_stack **stack_a, t_stack **stack_b, t_vr *p)
 
 void	adding_five_a(t_stack **stack_a, t_stack **stack_b, t_vr *p)
 {
+	if (!(*stack_b))
+		return ;
 	if (p->index == 0)
 		push_a(stack_a, stack_b);
 	else if (p->index == 1)

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 01:25:43 by maouzal           #+#    #+#             */
-/*   Updated: 2023/05/17 10:04:33 by maouzal          ###   ########.fr       */
+/*   Created: 2023/05/17 02:24:10 by maouzal           #+#    #+#             */
+/*   Updated: 2023/05/17 10:00:51 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 void	check_arg(int argc, char *argv[], t_vr *p)
 {
@@ -18,11 +18,11 @@ void	check_arg(int argc, char *argv[], t_vr *p)
 		exit(0);
 	check_numbers(argv, p);
 	is_daplicate(p);
-	is_sorted(p);
 }
 
-int	main(int argc, char *argv[])
+int	main(int ac, char *av[])
 {
+	char	*line;
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 	t_vr	*p;
@@ -32,17 +32,19 @@ int	main(int argc, char *argv[])
 	p = (t_vr *)malloc(sizeof(t_vr));
 	if (!p)
 		return (0);
-	check_arg(argc, argv, p);
-	push_to_stack_a(&stack_a, p);
-	if (p->len < 4)
-		sort_two_three(&stack_a);
-	else if (p->len == 4)
-		sort_four(&stack_a, &stack_b, p);
-	else if (p->len == 5)
-		sort_five(&stack_a, &stack_b, p);
-	else if (p->len > 5 && p->len < 101)
-		sort_100(&stack_a, &stack_b, p);
-	else if (p->len > 100)
-		sort_500(&stack_a, &stack_b, p);
+	check_arg(ac, av, p);
+	push_to_stack_a (&stack_a, p);
+	line = get_next_line(0);
+	while (line)
+	{
+		if (operatons(&stack_a, &stack_b, line) != 0)
+		{
+			free(line);
+			ft_error();
+		}
+		line = get_next_line(0);
+	}
+	free(line);
+	is_sorted(&stack_a);
 	return (0);
 }

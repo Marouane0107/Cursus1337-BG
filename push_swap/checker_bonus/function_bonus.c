@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   functions.c                                        :+:      :+:    :+:   */
+/*   function_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 01:24:06 by maouzal           #+#    #+#             */
-/*   Updated: 2023/05/17 03:48:43 by maouzal          ###   ########.fr       */
+/*   Created: 2023/05/17 03:49:14 by maouzal           #+#    #+#             */
+/*   Updated: 2023/05/17 05:35:01 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 static long	ft_maxlong(const char *str, long x, long res, long w)
 {
@@ -60,4 +60,16 @@ int	ft_isdigit(int c)
 		return (1);
 	else
 		return (0);
+}
+
+int	ft_strcmp(const char *x, const char *y)
+{
+	while (*x)
+	{
+		if (*x != *y)
+			break ;
+		x++;
+		y++;
+	}
+	return (*(const unsigned char *) x - *(const unsigned char *) y);
 }

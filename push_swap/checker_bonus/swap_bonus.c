@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_swap.c                                  :+:      :+:    :+:   */
+/*   swap_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/16 01:39:47 by maouzal           #+#    #+#             */
-/*   Updated: 2023/05/17 05:27:25 by maouzal          ###   ########.fr       */
+/*   Created: 2023/05/17 05:26:49 by maouzal           #+#    #+#             */
+/*   Updated: 2023/05/17 07:16:45 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 void	swap_a(t_stack *stack_a)
 {
@@ -21,7 +21,6 @@ void	swap_a(t_stack *stack_a)
 	tmp = stack_a->data;
 	stack_a->data = stack_a->next->data;
 	stack_a->next->data = tmp;
-	write(1, "sa\n", 3);
 }
 
 void	swap_b(t_stack *stack_b)
@@ -33,7 +32,6 @@ void	swap_b(t_stack *stack_b)
 	tmp = stack_b->data;
 	stack_b->data = stack_b->next->data;
 	stack_b->next->data = tmp;
-	write(1, "sb\n", 3);
 }
 
 void	swap_ab(t_stack *stack_a, t_stack *stack_b)
@@ -49,5 +47,4 @@ void	swap_ab(t_stack *stack_a, t_stack *stack_b)
 	stack_a->next->data = tmp;
 	stack_b->data = stack_b->next->data;
 	stack_b->next->data = tmp2;
-	write(1, "ss\n", 3);
 }

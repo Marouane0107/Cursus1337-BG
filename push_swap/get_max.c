@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 01:22:46 by maouzal           #+#    #+#             */
-/*   Updated: 2023/05/16 05:27:42 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/05/16 10:34:58 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	indexing(t_stack *b)
 {
 	int	i;
 
+	if (!b)
+		return ;
 	i = 0;
 	while (b)
 	{

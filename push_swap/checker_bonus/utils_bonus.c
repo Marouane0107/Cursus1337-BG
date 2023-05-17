@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 01:26:18 by maouzal           #+#    #+#             */
-/*   Updated: 2023/05/17 10:07:10 by maouzal          ###   ########.fr       */
+/*   Created: 2023/05/17 02:48:24 by maouzal           #+#    #+#             */
+/*   Updated: 2023/05/17 07:50:01 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 void	ft_error(void)
 {
@@ -34,20 +34,30 @@ void	ft_free(char **str)
 	}
 }
 
-void	is_sorted(t_vr *p)
+void	is_sorted(t_stack **a)
 {
-	int	i;
+	t_stack	*tmp;
 
-	i = 0;
-	while (i < p->len - 1)
+	if (!(*a))
+		return ;
+	tmp = (*a);
+	while (tmp->next)
 	{
-		if (p->holder[i] < p->holder[i + 1])
-			i++;
+		if (tmp->data < tmp->next->data)
+			tmp = tmp->next;
 		else
-			return ;
+			break ;
 	}
-	if (i + 1 == p->len)
+	if (tmp->next == NULL)
+	{
+		write(1, "OK\n", 3);
 		exit(0);
+	}
+	else
+	{
+		write(1, "KO\n", 3);
+		exit(0);
+	}
 }
 
 void	erray_alloction(char *argv[], t_vr *p)
@@ -60,28 +70,4 @@ void	erray_alloction(char *argv[], t_vr *p)
 	p->holder = (int *)malloc(sizeof(int) * i);
 	if (!p->holder)
 		return ;
-}
-
-void	sort_array(t_vr *p, int *arr)
-{
-	int	i;
-	int	j;
-	int	tmp;
-
-	i = 0;
-	while (i < p->len)
-	{
-		j = i + 1;
-		while (j < p->len)
-		{
-			if (arr[i] > arr[j])
-			{
-				tmp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = tmp;
-			}
-			j++;
-		}
-		i++;
-	}
 }

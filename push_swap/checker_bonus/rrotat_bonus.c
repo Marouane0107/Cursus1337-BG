@@ -1,74 +1,71 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_rotat.c                                 :+:      :+:    :+:   */
+/*   rrotat_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 01:25:09 by maouzal           #+#    #+#             */
-/*   Updated: 2023/05/17 05:24:08 by maouzal          ###   ########.fr       */
+/*   Created: 2023/05/17 05:20:32 by maouzal           #+#    #+#             */
+/*   Updated: 2023/05/17 07:16:31 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
-void	rotat_a(t_stack **stack_a)
+void	revrotat_a(t_stack **stack_a)
 {
-	t_stack	*head;
+	t_stack	*new_head;
 	t_stack	*tmp2;
 
 	if (!(*stack_a) || !((*stack_a)->next))
 		return ;
-	head = (*stack_a);
-	(*stack_a) = (*stack_a)->next;
 	tmp2 = (*stack_a);
-	while (tmp2->next != NULL)
+	while (tmp2->next->next != NULL)
 		tmp2 = tmp2->next;
-	tmp2->next = head;
-	head->next = NULL;
-	write(1, "ra\n", 3);
+	new_head = tmp2->next;
+	tmp2->next = NULL;
+	new_head->next = (*stack_a);
+	(*stack_a) = new_head;
 }
 
-void	rotat_b(t_stack **stack_b)
+void	revrotat_b(t_stack **stack_b)
 {
-	t_stack	*head;
+	t_stack	*new_head;
 	t_stack	*tmp2;
 
 	if (!(*stack_b) || !((*stack_b)->next))
 		return ;
-	head = (*stack_b);
-	(*stack_b) = (*stack_b)->next;
 	tmp2 = (*stack_b);
-	while (tmp2->next != NULL)
+	while (tmp2->next->next != NULL)
 		tmp2 = tmp2->next;
-	tmp2->next = head;
-	head->next = NULL;
-	write(1, "rb\n", 3);
+	new_head = tmp2->next;
+	tmp2->next = NULL;
+	new_head->next = (*stack_b);
+	(*stack_b) = new_head;
 }
 
-void	rotat_ab(t_stack **stack_a, t_stack **stack_b)
+void	revrotat_ab(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack	*head;
+	t_stack	*new_head;
 	t_stack	*tmp;
-	t_stack	*head2;
+	t_stack	*new_head2;
 	t_stack	*tmp2;
 
 	if (!(*stack_a) || !((*stack_a)->next) || !(*stack_b)
 		|| !((*stack_b)->next))
 		return ;
-	head = (*stack_a);
-	(*stack_a) = (*stack_a)->next;
 	tmp = (*stack_a);
-	while (tmp->next != NULL)
+	while (tmp->next->next != NULL)
 		tmp = tmp->next;
-	tmp->next = head;
-	head->next = NULL;
-	head2 = (*stack_b);
-	(*stack_b) = (*stack_b)->next;
+	new_head = tmp->next;
+	tmp->next = NULL;
+	new_head->next = (*stack_a);
+	(*stack_a) = new_head;
 	tmp2 = (*stack_b);
-	while (tmp2->next != NULL)
+	while (tmp2->next->next != NULL)
 		tmp2 = tmp2->next;
-	tmp2->next = head2;
-	head2->next = NULL;
-	write(1, "rr\n", 3);
+	new_head2 = tmp2->next;
+	tmp2->next = NULL;
+	new_head2->next = (*stack_b);
+	(*stack_b) = new_head;
 }
