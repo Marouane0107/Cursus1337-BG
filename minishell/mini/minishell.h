@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:28:50 by otamrani          #+#    #+#             */
-/*   Updated: 2023/08/28 00:48:54 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/08/31 20:11:22 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_env
 typedef struct s_data
 {
 	t_env *env;
-	char **path;
 	char **cmd;
 	int in;
 	int out;
@@ -95,10 +94,13 @@ void    ft_setenv(t_data **data, char *s, char *value);
 void	ft_lstadd_back2(t_data **lst, t_data *new);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **st_a, t_list *new);
+void	cmd_check(t_data *data);
 void	ft_exec(t_data *data);
 void	exec_cmd(t_data *data);
-void	ft_fork(t_data *data, pid_t *id, int fd[2]);
-void	changing_files(t_data *data, int fd[2]);
+void	milti_pipe(t_data *tmp, int fd[2]);
+void    parent(t_data *data, int fd[2]);
+void	child(t_data *data, int fd[2]);
+void	ft_close(t_data *data, int fd[2]);
 
 char	*check_expend(char *s, t_list **lst, int j);
 char	*searsh_env(char *c, t_env *env);
