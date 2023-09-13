@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   excution.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 19:58:37 by maouzal           #+#    #+#             */
-/*   Updated: 2023/08/31 21:37:39 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/13 19:39:05 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	cmd_check(t_data *data)
+int	cmd_check(t_data *data)
 {
-	if (!data)
-		return ;
+	if (!data || !data->cmd)
+		return (-1);
 	else if (ft_strcmp(data->cmd[0], "export") == 0)
 		ft_export(data);
 	else if (ft_strcmp(data->cmd[0], "cd") == 0)
@@ -29,76 +29,77 @@ void	cmd_check(t_data *data)
 	else if (ft_strcmp(data->cmd[0], "unset") == 0)
 		ft_unset(data);
 	else if (ft_strcmp(data->cmd[0], "exit") == 0)
-		ft_exit(0);
+		ft_exit(data);
+	else
+		return (1);
+	return (0);
 }
 
-void	get_cmd(t_data *data)
-{
-	while (data && data->next)
-	{
-		if(!data->cmd)
-		{
-			data->cmd = data->next->cmd;
-		}
-		else
-			return ;
-	}
-}
-
-void	exec_cmd(t_data *data)
-{
-	int		i;
-	char	*path;
-	char	**path_part;
-	char	*path_cmd;
-	char	*cmd_path;
-
-	i = 0;
-	if (!data->cmd)
-		return ;
-	path = getenv("PATH");
-	path_part = ft_split(path, ':');
-	get_cmd(data);
-	while (path_part[i])
-	{
-		cmd_path = ft_strjoin(path_part[i], "/");
-		path_cmd = ft_strjoin(cmd_path, data->cmd[0]);
-		if (access(path_cmd, X_OK) == -1)
-			free(path_cmd);
-		else if (execve(path_cmd, data->cmd, NULL) == -1)
-		{
-			printf("minishell: %s: command not found\n", data->cmd[0]);
-			exit(127);
-		}
-		i++;
-	}
-	printf("minishell: %s: command not found\n", data->cmd[0]);
-	exit(127);
-}
-
-void	milti_pipe(t_data *data, int fd[2])
+int	milti_pipe(t_data *data, int fd[2])
 {
 	pid_t	pid;
 	t_data	*tmp;
 
 	tmp = data;
-	while (data)
+	while (tmp)
 	{
 		pipe(fd);
-		if(pipe(fd) == -1)
+		if (pipe(fd) == -1)
 			perror("pipe");
 		pid = fork();
 		if (pid == -1)
 			perror("fork");
 		if (pid == 0)
-			child(data, fd);
-	
+		{
+			signal(SIGINT, SIG_DFL);
+			signal(SIGQUIT, SIG_DFL);
+			child(tmp, fd);
+		}
 		else
-			parent(data, fd);
-		data = data->next;
+			parent(fd);
+		tmp = tmp->next;
 	}
-	ft_close(tmp, fd);
-	while (waitpid(pid, NULL, 0) != -1);
+	ft_close_pipe(fd);
+	ft_close_file(tmp);
+	return (pid);
+}
+
+void	ft_wait_ex(int i)
+{
+	int	status;
+
+	status = 0;
+	waitpid (i, &status, 0);
+	while (wait(NULL) != -1)
+		;
+	if (WIFEXITED(status))
+		g_lobal.ex = WEXITSTATUS(status);
+	if (WIFSIGNALED(status))
+	{
+		write(1, "\n", 1);
+		g_lobal.ex = WTERMSIG(status) + 128;
+	}
+}
+
+void	singl_cmd(t_data *data, pid_t pid)
+{
+	out_in_file(data);
+	if (cmd_check(data) > 0)
+	{
+		pid = fork();
+		if (pid == -1)
+			perror("fork");
+		if (pid == 0)
+		{
+			signal(SIGINT, SIG_DFL);
+			signal(SIGQUIT, SIG_DFL);
+			exec_cmd(data);
+			exit(0);
+		}
+		else
+			waitpid(pid, NULL, 0);
+	}
+	ft_close_file(data);
 }
 
 void	ft_exec(t_data *data)
@@ -106,15 +107,12 @@ void	ft_exec(t_data *data)
 	pid_t	pid;
 	int		fd[2];
 
+	pid = 0;
+	g_lobal.ex = 0;
+	signal(SIGINT, SIG_IGN);
 	if (data->cmd && data->next)
-		milti_pipe(data, fd);
+		pid = milti_pipe(data, fd);
 	else
-	{
-		pid = fork();
-		if (pid == -1)
-			perror("fork");
-		if (pid == 0)
-			exec_cmd(data);
-	}
-	waitpid(pid, NULL, 0);
+		singl_cmd(data, pid);
+	ft_wait_ex(pid);
 }

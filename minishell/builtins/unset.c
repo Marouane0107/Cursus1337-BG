@@ -3,31 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 09:36:19 by maouzal           #+#    #+#             */
-/*   Updated: 2023/08/22 23:34:20 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/13 19:06:37 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini/minishell.h"
 
-void    ft_unset(t_data *data)
+void	ft_unset(t_data *data)
 {
-    int i;
-    t_env *tmp;
+	int		i;
+	t_env	*tmp;
+	t_env	*tmp2;
 
-    i = 1;
-    tmp = data->env;
-while (tmp && tmp->next && data->cmd[i])
-    {
-       
-        if (ft_strcmp((tmp)->next->name, data->cmd[i]) == 0)
-        {
-            tmp->next = (tmp)->next->next;
-            i++;
-            tmp = data->env;
-        }
-        tmp = (tmp)->next;
-    }
+	i = 1;
+	tmp = g_lobal.env;
+	if (ft_strcmp(tmp->name, data->cmd[i]) == 0)
+	{
+		g_lobal.env = tmp->next;
+		tmp = g_lobal.env;
+		i++;
+	}
+	while (tmp && tmp->next && data->cmd[i])
+	{
+		if (ft_strcmp((tmp)->next->name, data->cmd[i]) == 0)
+		{
+			tmp2 = (tmp)->next;
+			tmp->next = (tmp)->next->next;
+			free(tmp2);
+			i++;
+			tmp = g_lobal.env;
+		}
+		tmp = (tmp)->next;
+	}
 }
