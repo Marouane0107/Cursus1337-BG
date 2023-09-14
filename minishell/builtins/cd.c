@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 17:28:43 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/13 19:13:42 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/14 20:21:00 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,17 @@ void	ft_cd(t_data *data)
 	if (!(data->cmd[1]) || !(ft_strcmp(data->cmd[1], "~")))
 		change_path(data, ft_getenv("HOME"));
 	else if (access(data->cmd[1], X_OK) == -1
-		|| access(data->cmd[1], F_OK) == -1)
+		&& access(data->cmd[1], F_OK) == -1)
+	{
 		printf("cd: %s: No such file or directory\n", data->cmd[1]);
+		g_lobal.ex = 1;
+	}
 	else if (access(data->cmd[1], F_OK) == 0
 		&& access(data->cmd[1], X_OK) == -1)
-		printf("cd: %s: Not a directory\n", data->cmd[1]);
+	{
+		printf("cd: %s: Permission denied\n", data->cmd[1]);
+		g_lobal.ex = 1;
+	}
 	else if (access(data->cmd[1], F_OK) == 0
 		&& access(data->cmd[1], X_OK) == 0)
 		change_path(data, data->cmd[1]);

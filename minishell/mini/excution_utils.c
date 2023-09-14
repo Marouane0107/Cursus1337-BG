@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 11:40:02 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/13 19:41:59 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/14 21:46:57 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,6 @@ void	get_cmd(t_data *data)
 	}
 }
 
-// void	shlvl(t_data *data, char *s)
-// {
-// 	if (ft_strcmp(s, "./minishell") == 0)
-// 	{
-// 		g_lobal.i++;
-// 		data->cmd[0] = ft_strdup("export");
-// 		data->cmd[1] = ft_strjoin("SHLVL=", ft_itoa(g_lobal.i));
-// 		ft_export(data);
-// 		data->cmd[0] = ft_strdup("./minishell");
-// 		free(data->cmd[1]);
-// 		printf("im here\n");
-// 	}	
-// }
 void	child_sigint(int sigin)
 {
 	(void)sigin;
@@ -63,11 +50,13 @@ void	check_cmd_path(t_data *data)
 			if (access(data->cmd[i], X_OK) == -1)
 			{
 				printf("%s: command not found\n", data->cmd[i]);
+				g_lobal.ex = 127;
 				exit(127);
 			}
 			else if (execve(data->cmd[i], data->cmd, environ) == -1)
 			{
 				printf("%s: command not found\n", data->cmd[i]);
+				g_lobal.ex = 127;
 				exit(127);
 			}
 		}
@@ -82,7 +71,7 @@ void	exution( t_data *data, char **path_part, int i)
 	extern char	**environ;
 
 	if (!*data->cmd[0])
-		return (printf("'': command not found\n"), exit(127));
+		return (printf("'': command not found\n"), g_lobal.ex = 127, exit(127));
 	signal(SIGINT, child_sigint);
 	while (path_part && path_part[i])
 	{
@@ -96,6 +85,7 @@ void	exution( t_data *data, char **path_part, int i)
 		else if (execve(path_cmd, data->cmd, environ) == -1)
 		{
 			printf("%s: command not found\n", data->cmd[0]);
+			g_lobal.ex = 127;
 			exit(127);
 		}
 		i++;
@@ -117,11 +107,15 @@ void	exec_cmd(t_data *data)
 	if (!path)
 	{
 		printf("minishell: %s: No such file or directory\n", data->cmd[0]);
+		g_lobal.ex = 127;
 		exit(127);
 	}
 	path_part = ft_split(path, ':');
 	get_cmd(data);
 	exution(data, path_part, i);
 	printf("%s: command not found\n", ft_strdup(data->cmd[0]));
+	g_lobal.ex = 127;
 	exit(127);
 }
+
+// exit error

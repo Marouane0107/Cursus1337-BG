@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 13:41:30 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/13 19:24:23 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/14 20:23:31 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	name_check(char	*name)
 	if (name[0] >= 48 && name[0] <= 57)
 	{
 		printf("minishell: export: `%s': not a valid identifier\n", name);
+		g_lobal.ex = 1;
 		return (1);
 	}
 	while (name[i])
@@ -32,13 +33,14 @@ int	name_check(char	*name)
 		else
 		{
 			printf("minishell: export: `%s': not a valid identifier\n", name);
+			g_lobal.ex = 1;
 			return (1);
 		}
 	}
 	return (0);
 }
 
-void	add_env_norm(t_data *data, char *s, char *name, int i)
+char	*add_env_norm(t_data *data, char *s, char *name, int i)
 {
 	if (s[0] != '=' && s[i] == '=' && s[i - 1] == '+')
 	{
@@ -50,12 +52,14 @@ void	add_env_norm(t_data *data, char *s, char *name, int i)
 	{
 		printf("minishell: export: `%s': not a valid identifier\n",
 			data->cmd[g_lobal.j]);
-		return ;
+		g_lobal.ex = 1;
+		return (0);
 	}
 	if (name_check(name))
-		return ;
+		return (0);
 	if (data->f == 1)
 		i++;
+	return (name);
 }
 
 void	ft_add_env(t_data *data, char *s)
@@ -70,7 +74,7 @@ void	ft_add_env(t_data *data, char *s)
 	data->f = 0;
 	while (s[i] && s[i] != '=')
 		i++;
-	add_env_norm(data, s, name, i);
+	name = add_env_norm(data, s, name, i);
 	if (s[i] == '=')
 	{
 		i++;

@@ -6,11 +6,20 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 09:36:19 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/13 19:06:37 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/14 19:53:35 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini/minishell.h"
+
+void	unset_head(t_data *data, t_env *tmp)
+{
+	if (ft_strcmp(tmp->name, data->cmd[1]) == 0)
+	{
+		g_lobal.env = tmp->next;
+		tmp = g_lobal.env;
+	}
+}
 
 void	ft_unset(t_data *data)
 {
@@ -20,12 +29,7 @@ void	ft_unset(t_data *data)
 
 	i = 1;
 	tmp = g_lobal.env;
-	if (ft_strcmp(tmp->name, data->cmd[i]) == 0)
-	{
-		g_lobal.env = tmp->next;
-		tmp = g_lobal.env;
-		i++;
-	}
+	unset_head(data, tmp);
 	while (tmp && tmp->next && data->cmd[i])
 	{
 		if (ft_strcmp((tmp)->next->name, data->cmd[i]) == 0)
@@ -37,5 +41,10 @@ void	ft_unset(t_data *data)
 			tmp = g_lobal.env;
 		}
 		tmp = (tmp)->next;
+		if (!tmp->next && data->cmd[i])
+		{
+			tmp = g_lobal.env;
+			i++;
+		}
 	}
 }

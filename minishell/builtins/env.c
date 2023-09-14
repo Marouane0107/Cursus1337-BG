@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 09:53:38 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/13 19:05:27 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/14 20:48:49 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_env(t_data *data)
 		ft_putstr_fd("env: ", 1);
 		ft_putstr_fd(data->cmd[1], 1);
 		ft_putstr_fd(": No such file or directory\n", 1);
+		g_lobal.ex = 127;
 		return ;
 	}
 	while (tmp)

@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 19:58:37 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/13 19:39:05 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/14 22:00:25 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	singl_cmd(t_data *data, pid_t pid)
 	out_in_file(data);
 	if (cmd_check(data) > 0)
 	{
+		g_lobal.i = 1;
 		pid = fork();
 		if (pid == -1)
 			perror("fork");
@@ -94,10 +95,8 @@ void	singl_cmd(t_data *data, pid_t pid)
 			signal(SIGINT, SIG_DFL);
 			signal(SIGQUIT, SIG_DFL);
 			exec_cmd(data);
-			exit(0);
+			exit(g_lobal.ex);
 		}
-		else
-			waitpid(pid, NULL, 0);
 	}
 	ft_close_file(data);
 }
@@ -109,10 +108,21 @@ void	ft_exec(t_data *data)
 
 	pid = 0;
 	g_lobal.ex = 0;
+	g_lobal.i = 0;
 	signal(SIGINT, SIG_IGN);
 	if (data->cmd && data->next)
+	{
+		if (data->in == -3)
+			return ;
+		g_lobal.i = 1;
 		pid = milti_pipe(data, fd);
+	}
 	else
+	{
+		if (data->in == -3)
+			return ;
 		singl_cmd(data, pid);
-	ft_wait_ex(pid);
+	}
+	if (g_lobal.i == 1)
+		ft_wait_ex(pid);
 }
