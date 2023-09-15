@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 17:28:43 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/15 01:17:36 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/15 22:33:22 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	ft_cd(t_data *data)
 {
 	if (data->cmd[1] && data->cmd[2])
 	{
-		printf("cd: too many arguments\n");
+		ft_putstr_fd("cd: too many arguments\n", 2);
 		g_lobal.ex = 1;
 		return ;
 	}
@@ -98,19 +98,18 @@ void	ft_cd(t_data *data)
 		change_path(data, ft_getenv("HOME"));
 	else if (access(data->cmd[1], X_OK) == -1
 		&& access(data->cmd[1], F_OK) == -1)
-	{
-		printf("cd: %s: No such file or directory\n", data->cmd[1]);
-		g_lobal.ex = 1;
-	}
+		No_such_file_or_directory(data);
 	else if (access(data->cmd[1], F_OK) == 0
 		&& access(data->cmd[1], X_OK) == -1)
 	{
-		printf("cd: %s: Permission denied\n", data->cmd[1]);
+		ft_putstr_fd("cd: ", 2);
+		ft_putstr_fd(data->cmd[1], 2);
+		ft_putstr_fd(": Not a directory\n", 2);
 		g_lobal.ex = 1;
 	}
 	else if (access(data->cmd[1], F_OK) == 0
 		&& access(data->cmd[1], X_OK) == 0)
 		change_path(data, data->cmd[1]);
 	else
-		printf("cd: %s: No such file or directory\n", data->cmd[1]);
+		No_such_file_or_directory(data);
 }

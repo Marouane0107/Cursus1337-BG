@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 11:40:02 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/15 02:41:03 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/15 22:34:46 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,13 @@ void	check_cmd_path(t_data *data)
 		{
 			if (access(data->cmd[i], X_OK) == -1)
 			{
-				printf("%s: command not found\n", data->cmd[i]);
+				cmd_not_found(data, i);
 				g_lobal.ex = 127;
 				exit(127);
 			}
 			else if (execve(data->cmd[i], data->cmd, environ) == -1)
 			{
-				printf("%s: command not found\n", data->cmd[i]);
-				g_lobal.ex = 127;
+				cmd_not_found(data, i);
 				exit(127);
 			}
 		}
@@ -71,7 +70,8 @@ void	exution( t_data *data, char **path_part, int i)
 	extern char	**environ;
 
 	if (!*data->cmd[0])
-		return (printf("'': command not found\n"), g_lobal.ex = 127, exit(127));
+		return (ft_putstr_fd("'': command not found\n", 2),
+			g_lobal.ex = 127, exit(127));
 	signal(SIGINT, child_sigint);
 	while (path_part && path_part[i])
 	{
@@ -84,8 +84,7 @@ void	exution( t_data *data, char **path_part, int i)
 		}
 		else if (execve(path_cmd, data->cmd, environ) == -1)
 		{
-			printf("%s: command not found\n", data->cmd[0]);
-			g_lobal.ex = 127;
+			cmd_not_found(data, 0);
 			exit(127);
 		}
 		i++;
@@ -106,15 +105,13 @@ void	exec_cmd(t_data *data)
 		check_cmd_path(data);
 	if (!path)
 	{
-		printf("minishell: %s: No such file or directory\n", data->cmd[0]);
-		g_lobal.ex = 127;
+		ft_putstr_fd("minishell: ", 2);
+		cmd_not_found(data, 0);
 		exit(127);
 	}
 	path_part = ft_split(path, ':');
 	get_cmd(data);
 	exution(data, path_part, i);
-	printf("%s: command not found\n", ft_strdup(data->cmd[0]));
-	g_lobal.e = 1;
-	g_lobal.ex = 127;
+	cmd_not_found(data, i);
 	exit(127);
 }

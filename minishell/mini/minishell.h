@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:28:50 by otamrani          #+#    #+#             */
-/*   Updated: 2023/09/15 01:39:44 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/15 22:30:20 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ typedef struct s_global
 	int				g;
 	int				i;
 	int				j;
-	int				e;
 	t_env			*env;
 	int				ex;
 	t_grbg			*hold;
@@ -157,6 +156,8 @@ void				ft_lstadd_back(t_list **lst, t_list *new);
 char				*searsh_env(char *c, int j);
 int					syntax_error(char *str);
 int					check_spacial(char *str);
+void				cmd_not_found(t_data *data, int i);
+void				No_such_file_or_directory(t_data *data);
 void				add_node(t_list **head, char *content, int token);
 
 #endif
