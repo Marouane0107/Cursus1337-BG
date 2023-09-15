@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:51:09 by otamrani          #+#    #+#             */
-/*   Updated: 2023/09/14 20:48:42 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/14 23:04:36 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,5 +150,5 @@ void	parss(void)
 // cmd = [cat]
 // cmd = [l]
 // f
-// f
+// f		if (data && !g_lobal.g)
 // command not found

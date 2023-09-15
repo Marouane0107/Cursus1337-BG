@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 19:58:37 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/14 22:00:25 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/15 02:46:21 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	ft_exec(t_data *data)
 	pid = 0;
 	g_lobal.ex = 0;
 	g_lobal.i = 0;
+	g_lobal.e = 0;
 	signal(SIGINT, SIG_IGN);
 	if (data->cmd && data->next)
 	{
@@ -126,3 +127,5 @@ void	ft_exec(t_data *data)
 	if (g_lobal.i == 1)
 		ft_wait_ex(pid);
 }
+
+//hgjgj | ls // g_lobal.e // printf("minishell: %s: command not found\n", data->cmd[0]);

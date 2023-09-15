@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 17:28:43 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/14 20:21:00 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/15 01:17:36 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_setenv(t_data *data, char *s, char *value)
 				tmp->value = ft_strjoin(tmp->value, value);
 				return (0);
 			}
-			tmp->value = NULL;
+			free(tmp->value);
 			tmp->value = value;
 			return (0);
 		}
@@ -72,15 +72,15 @@ int	ft_setenv(t_data *data, char *s, char *value)
 
 void	change_path(t_data *data, char *path)
 {
-	char	old_path[BUFFER_SIZE];
-	char	new_path[BUFFER_SIZE];
+	char	*old_path;
+	char	*new_path;
 
-	old_path[0] = '\0';
-	new_path[0] = '\0';
-	getcwd(old_path, sizeof(old_path));
+	old_path = NULL;
+	new_path = NULL;
+	old_path = getcwd(old_path, 0);
 	if (!chdir(path))
 	{
-		getcwd(new_path, sizeof(new_path));
+		new_path = getcwd(new_path, 0);
 		ft_setenv(data, "PWD", new_path);
 		ft_setenv(data, "OLDPWD", old_path);
 	}
@@ -88,7 +88,13 @@ void	change_path(t_data *data, char *path)
 
 void	ft_cd(t_data *data)
 {
-	if (!(data->cmd[1]) || !(ft_strcmp(data->cmd[1], "~")))
+	if (data->cmd[1] && data->cmd[2])
+	{
+		printf("cd: too many arguments\n");
+		g_lobal.ex = 1;
+		return ;
+	}
+	else if (!(data->cmd[1]) || !(ft_strcmp(data->cmd[1], "~")))
 		change_path(data, ft_getenv("HOME"));
 	else if (access(data->cmd[1], X_OK) == -1
 		&& access(data->cmd[1], F_OK) == -1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils6.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otamrani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:39:23 by otamrani          #+#    #+#             */
-/*   Updated: 2023/09/08 15:42:07 by otamrani         ###   ########.fr       */
+/*   Updated: 2023/09/14 23:16:44 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,12 @@ char	*searsh_env(char *c, int j)
 	{
 		if (!ft_strcmp(tmp->name, c))
 		{
-			if (ft_strchr(tmp->value, ' ') && j == 11)
+			if (tmp->value && ft_strchr(tmp->value, ' ') && j == 11)
 				return (ft_strjoin("$", c));
-			return (ft_strdup(tmp->value));
+			if (tmp->value)
+				return (ft_strdup(tmp->value));
+			else
+				return (ft_strdup(""));
 		}
 		tmp = tmp->next;
 	}

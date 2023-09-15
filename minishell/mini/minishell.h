@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:28:50 by otamrani          #+#    #+#             */
-/*   Updated: 2023/09/13 19:01:29 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/15 01:39:44 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-# define BUFFER_SIZE 102400
+# define BUFFER_SIZE 1024
 
 int					quote(char *in);
 void				parss(void);
@@ -71,6 +71,7 @@ typedef struct s_global
 	int				g;
 	int				i;
 	int				j;
+	int				e;
 	t_env			*env;
 	int				ex;
 	t_grbg			*hold;

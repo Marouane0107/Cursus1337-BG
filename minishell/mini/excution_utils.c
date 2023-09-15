@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 11:40:02 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/14 21:46:57 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/15 02:41:03 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,7 @@ void	exec_cmd(t_data *data)
 	get_cmd(data);
 	exution(data, path_part, i);
 	printf("%s: command not found\n", ft_strdup(data->cmd[0]));
+	g_lobal.e = 1;
 	g_lobal.ex = 127;
 	exit(127);
 }
-
-// exit error

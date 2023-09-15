@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:25:08 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/14 19:59:25 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/15 01:28:31 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	child(t_data *data, int fd[2])
 		ft_close_pipe(fd);
 		if (cmd_check(data) > 0)
 			exec_cmd(data);
-		exit(0);
+		exit(g_lobal.ex);
 	}
 	else if (data->out != -1)
 	{
@@ -73,6 +73,6 @@ void	child(t_data *data, int fd[2])
 		ft_close_pipe(fd);
 		if (cmd_check(data) > 0)
 			exec_cmd(data);
-		exit(0);
+		exit(g_lobal.ex);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 13:41:30 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/14 20:23:31 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/15 01:24:09 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	ft_add_env(t_data *data, char *s)
 	while (s[i] && s[i] != '=')
 		i++;
 	name = add_env_norm(data, s, name, i);
+	if (!name)
+		return ;
 	if (s[i] == '=')
 	{
 		i++;
