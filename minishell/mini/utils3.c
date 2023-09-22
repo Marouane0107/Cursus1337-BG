@@ -6,7 +6,7 @@
 /*   By: otamrani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:50:44 by otamrani          #+#    #+#             */
-/*   Updated: 2023/09/08 15:41:22 by otamrani         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:22:51 by otamrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	msg_error(t_list *lst)
 {
 	int	i;
 
+	g_lobal.ex = 2;
 	i = end_struct(&lst);
 	if (i == 1)
 		ft_putstr_fd("bash: syntax error near unexpected token `|'\n", 2);
@@ -37,8 +38,10 @@ int	ins(char c, int m, int j)
 
 int	noption(t_list **lst)
 {
-	int	i;
+	int		i;
+	char	**s;
 
+	s = NULL;
 	i = 0;
 	if ((*lst) && (*lst)->token == 1)
 		(*lst) = (*lst)->next;
@@ -46,8 +49,14 @@ int	noption(t_list **lst)
 	{
 		if ((*lst)->token == 1)
 			return (i);
+		if ((*lst)->token == -7)
+		{
+			s = ft_split((*lst)->content, ' ');
+			i += flen(s);
+		}
+		else
+			i++;
 		(*lst) = (*lst)->next;
-		i++;
 	}
 	return (i);
 }
@@ -79,74 +88,3 @@ t_data	*convert_lst(t_list *lst)
 	ffree(s);
 	return (data);
 }
-// " '$USER' "
-//  echo ''''''''''$USER''''''''''
-// remove space '\" ' " \"\"" split with space
-// "$USER""Users/$USER/file""'$USER'"'$USER
-//                | not expend
-// secend third not expend echo "$USER$USER$USER"
-// echo " $USER  "'$PWD'	no exp
-// << lgsd
-// here_doc: gsgfd
-// here_doc: gfs
-// here_doc: gsdfgetkonjr
-// here_doc: lgsd
-// minishell$ gsag << l
-// here_doc: gasohkfd
-// here_doc: gsahojfdal
-// here_doc: fjoa
-// here_doc: l
-// minishell$ gsg < "l"
-// open: Permission denied
-// minishell$ gsg << "l"
-// here_doc: gsafhf
-// here_doc: shfahfa
-// here_doc: shfa
-// here_doc: gfa
-// here_doc: l
-// minishell$
-///////////////////////////////////////////////////////
-// minishell$ > ""
-// bash: : No such file or directory
-// in = 0
-// out = 1
-// minishell$ > "" | ls
-// bash: : No such file or directory
-// in = 0
-// out = -1
-// in = -2
-// out = 1
-// cmd = [ls]
-// minishell$ > '' |  ls
-// bash: : No such file or directory
-// in = 0
-// out = -1
-// in = -2
-// out = 1
-// cmd = [ls]
-// minishell$ "" | ''
-// in = 0
-// out = -1
-// cmd = ['']
-// in = -2
-// out = 1
-// cmd = ['']
-// minishell$ ls ""
-// in = 0
-// out = 1
-// cmd = [ls]
-// cmd = ['']
-// minishell$ ls ''
-// in = 0
-// out = 1
-// cmd = [ls]
-// cmd = ['']
-// minishell$ pwdd
-// in = 0
-// out = 1
-// cmd = [pwdd]
-// minishell$ ls
-// in = 0
-// out = 1
-// cmd = [ls]
-// minishell$

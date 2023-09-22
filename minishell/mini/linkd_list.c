@@ -6,7 +6,7 @@
 /*   By: otamrani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:28:15 by otamrani          #+#    #+#             */
-/*   Updated: 2023/09/08 15:29:03 by otamrani         ###   ########.fr       */
+/*   Updated: 2023/09/17 01:42:09 by otamrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_data	*ft_lstnew2(int in, int out, int i)
 	{
 		node->out = out;
 		node->in = in;
-		node->cmd = (char **)ft_calloc(i, sizeof(char *));
+		node->cmd = (char **)ft_calloc((i + 1), sizeof(char *));
 		node->next = NULL;
 	}
 	ft_lstadd(&g_lobal.hold, lst_new(node->cmd, 0, 0));

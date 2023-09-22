@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excution_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: otamrani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 11:40:02 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/15 22:34:46 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/17 21:02:00 by otamrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@ void	get_cmd(t_data *data)
 		else
 			return ;
 	}
-}
-
-void	child_sigint(int sigin)
-{
-	(void)sigin;
-	printf("gfd\n");
-	g_lobal.ex = 130;
 }
 
 void	check_cmd_path(t_data *data)
@@ -63,16 +56,15 @@ void	check_cmd_path(t_data *data)
 	}
 }
 
-void	exution( t_data *data, char **path_part, int i)
+void	exution(t_data *data, char **path_part, int i)
 {
 	char		*cmd_path;
 	char		*path_cmd;
 	extern char	**environ;
 
 	if (!*data->cmd[0])
-		return (ft_putstr_fd("'': command not found\n", 2),
-			g_lobal.ex = 127, exit(127));
-	signal(SIGINT, child_sigint);
+		return (ft_putstr_fd("'': command not found\n", 2), g_lobal.ex = 127,
+			exit(127));
 	while (path_part && path_part[i])
 	{
 		cmd_path = ft_strjoin(path_part[i], "/");
@@ -99,6 +91,8 @@ void	exec_cmd(t_data *data)
 
 	i = 0;
 	if (!data->cmd || !*data->cmd)
+		return ;
+	if (data->in == -3 || data->out == -3)
 		return ;
 	path = ft_getenv("PATH");
 	if (data->cmd[i][0] == '/' || data->cmd[i][0] == '.')

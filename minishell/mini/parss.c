@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parss.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: otamrani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:51:09 by otamrani          #+#    #+#             */
-/*   Updated: 2023/09/14 23:04:36 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/17 21:52:03 by otamrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ t_data	*distribut(char *input)
 	data = NULL;
 	lst = NULL;
 	if (!*input)
+	{
+		g_lobal.ex = 0;
 		return (0);
+	}
 	if (!quote(input))
 		return (msg_error(lst), NULL);
 	lst = treatin(input, lst);
@@ -87,23 +90,15 @@ void	sigint_handler(int sig)
 	rl_redisplay();
 }
 
-void	parss(void)
+void	parss(t_data *data, char *input)
 {
-	char	*input;
-	int		x;
-	int		y;
-	t_data	*data;
+	int	x;
+	int	y;
 
-	data = NULL;
-	g_lobal.env = get_environ();
-	input = NULL;
 	x = dup(0);
 	y = dup(1);
-	g_lobal.ex = 0;
 	while (1)
 	{
-		if (input)
-			free(input);
 		dup2(x, 0);
 		dup2(y, 1);
 		signal(SIGINT, sigint_handler);
@@ -111,44 +106,14 @@ void	parss(void)
 		input = readline("minishell$ ");
 		g_lobal.g = 0;
 		if (!input)
-			exit(g_lobal.ex);
-		add_history(input);
+			ft_exitcd();
+		if (input && *input)
+			add_history(input);
 		data = distribut(input);
 		if (data && !g_lobal.g)
 			ft_exec(data);
-		if (data)
-		{
-			free_data(data);
-			data = NULL;
-		}
+		ft_tfree(data, input);
 		if (!data)
 			continue ;
 	}
 }
-
-// cd .. leaks
-
-// a="ls -l"
-// export a=ls | export a+=l == a=l ??
-// echo ad >a
-// exit 2
-// rm -rf ./ pwd
-// bash ./minishel PATH
-// bash -> ./minishell !env
-// $P pwd export export PATH="" export export export declare -x PWD=""
-// export declare -x PWD="/nfs/homes/otamrani"
-// cd .. pwd
-//////////////////////////////
-// cat gsgrt & cat | fdsa -> exit status echo $?
-// env -i minishell cmd not work
-//_="/usr/bin/" add command exec in it
-////echo ad >a
-// tty
-// cat l
-// in = 0
-// out = 1
-// cmd = [cat]
-// cmd = [l]
-// f
-// f		if (data && !g_lobal.g)
-// command not found

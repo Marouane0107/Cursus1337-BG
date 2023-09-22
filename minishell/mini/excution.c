@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   excution.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: otamrani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 19:58:37 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/15 22:35:29 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/17 20:38:26 by otamrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,30 @@ int	milti_pipe(t_data *data, int fd[2])
 void	ft_wait_ex(int i)
 {
 	int	status;
+	int	j;
+	int	b;
 
 	status = 0;
-	waitpid (i, &status, 0);
-	while (wait(NULL) != -1)
-		;
+	waitpid(i, &status, 0);
+	b = 0;
 	if (WIFEXITED(status))
 		g_lobal.ex = WEXITSTATUS(status);
 	if (WIFSIGNALED(status))
 	{
 		write(1, "\n", 1);
 		g_lobal.ex = WTERMSIG(status) + 128;
+		b = 1;
 	}
+	while (wait(&j) != -1)
+	{
+		if (WIFSIGNALED(j) && !b && j != 13)
+		{
+			write(1, "\n", 1);
+			break ;
+		}
+	}
+	while (wait(&j) != -1)
+		;
 }
 
 void	singl_cmd(t_data *data, pid_t pid)
@@ -86,6 +98,7 @@ void	singl_cmd(t_data *data, pid_t pid)
 	out_in_file(data);
 	if (cmd_check(data) > 0)
 	{
+		g_lobal.ex = 0;
 		g_lobal.i = 1;
 		pid = fork();
 		if (pid == -1)
@@ -107,19 +120,17 @@ void	ft_exec(t_data *data)
 	int		fd[2];
 
 	pid = 0;
-	g_lobal.ex = 0;
 	g_lobal.i = 0;
 	signal(SIGINT, SIG_IGN);
 	if (data->cmd && data->next)
 	{
-		if (data->in == -3)
-			return ;
+		g_lobal.ex = 0;
 		g_lobal.i = 1;
 		pid = milti_pipe(data, fd);
 	}
 	else
 	{
-		if (data->in == -3)
+		if (data->in == -3 || data->out == -3)
 			return ;
 		singl_cmd(data, pid);
 	}

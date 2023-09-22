@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: otamrani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 16:28:50 by otamrani          #+#    #+#             */
-/*   Updated: 2023/09/15 22:30:20 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/09/17 21:52:30 by otamrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
 # define BUFFER_SIZE 1024
 
 int					quote(char *in);
-void				parss(void);
 void				ft_free(char **p);
 void				ffree(char **p);
 int					ft_strchrr(char *s, char c);
@@ -67,10 +66,13 @@ typedef struct s_grbg
 }					t_grbg;
 typedef struct s_global
 {
+	int				spex;
+	char			*pwd;
 	int				n;
 	int				g;
 	int				i;
 	int				j;
+	int				new_line;
 	t_env			*env;
 	int				ex;
 	t_grbg			*hold;
@@ -91,6 +93,7 @@ typedef struct s_data
 t_data				*convert_lst(t_list *lst);
 int					openout(t_list *lst);
 int					openin(t_list *tmp, char **s, int j);
+void				parss(t_data *data, char *inp);
 char				*ft_getenv(char *s);
 t_env				*ft_lstdadd_back1(t_env **lst, t_env *new);
 t_grbg				*lst_new(char **p, char *name, char *value);
@@ -135,15 +138,18 @@ void				ft_lstadd(t_grbg **lst, t_grbg *new);
 t_grbg				*lst_new(char **p, char *name, char *value);
 t_data				*distribut(char *input);
 void				free_lst(t_list *lst);
+char				*open_rand(void);
 void				free_env(t_env *env);
 void				free_data(t_data *data);
+int					cheker(t_list *lst);
 char				*ft_get_line(char *s);
 char				*ft_str(char s);
+void				er_amb(char *s);
 char				*get_next_line(int fd);
 void				sigint_handler(int sig);
 int					get_exp(char *s, int j, char *q, int m);
 t_env				*get_environ(void);
-char				*check_expend(char *s, t_list **lst, int j);
+char				*check_expend(char *s, int j);
 t_data				*ft_lstnew2(int in, int out, int i);
 void				ft_lstadd_back2(t_data **lst, t_data *new);
 int					ft_word(char *s, t_list **lst);
@@ -157,7 +163,10 @@ char				*searsh_env(char *c, int j);
 int					syntax_error(char *str);
 int					check_spacial(char *str);
 void				cmd_not_found(t_data *data, int i);
-void				No_such_file_or_directory(t_data *data);
+void				no_such_file_or_directory(t_data *data);
 void				add_node(t_list **head, char *content, int token);
-
+int					flen(char **s);
+void				ft_tfree(t_data *data, char *in);
+void				short_f(t_data *tmp1, t_list **lst, t_list *tmp);
+void				ft_exitcd(void);
 #endif
