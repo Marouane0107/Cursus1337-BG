@@ -6,17 +6,13 @@
 # include <stdio.h>
 # include <unistd.h>
 
-typedef struct s_philo
-{
-	pthread_t *philo;
-	int	id;
-
-}		t_philo;
 
 typedef struct s_data
 {
 	pthread_mutex_t *forks;
 	pthread_mutex_t	print;
+	pthread_t *philo;
+	int	id;
 	int	nb_philo;
 	int	time_to_die;
 	int	time_to_eat;
@@ -25,11 +21,22 @@ typedef struct s_data
 
 }		t_data;
 
+
+typedef struct s_info
+{
+	int	id;
+	int left_fork;
+	int right_fork;
+	int	last_eat;
+	t_data	*data;
+
+}		t_info;
+
 int		ft_atoi(char *str);
-void    take_forks(t_data *data, t_philo *philo);
-void    eat(t_data *data, t_philo *philo);
-void    sleep_think(t_data *data, t_philo *philo);
-void    routine(t_data *data, t_philo *philo);
-void    creat_treads(t_data *data, t_philo *philo);
+void    take_forks(t_info *info);
+void    eat(t_info *info);
+void    sleep_think(t_info *data);
+void    *routine(void *arg);
+void    creat_treads(t_info *info);
 
 #endif
