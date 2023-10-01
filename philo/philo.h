@@ -5,6 +5,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <sys/time.h>
 
 
 typedef struct s_data
@@ -18,7 +19,7 @@ typedef struct s_data
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	nb_eat;
-
+	long	start_time;
 }		t_data;
 
 
@@ -28,15 +29,20 @@ typedef struct s_info
 	int left_fork;
 	int right_fork;
 	int	last_eat;
+	int eat_count;
+
 	t_data	*data;
 
 }		t_info;
 
 int		ft_atoi(char *str);
+int		ft_get_time(void);
+int		ft_usleep(int time);
 void    take_forks(t_info *info);
 void    eat(t_info *info);
 void    sleep_think(t_info *data);
 void    *routine(void *arg);
 void    creat_treads(t_info *info);
+void	*check_death();
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:29:50 by maouzal           #+#    #+#             */
-/*   Updated: 2023/09/30 01:49:44 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/10/01 01:55:43 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,18 @@ int	init_philo(t_data *data, t_info *info, int argc, char **argv)
 	info->id = 1;
 	data->time_to_die = ft_atoi(argv[2]);
 	if (data->time_to_die < 60)
-		return (printf("Error, time too short !"), 1);
+		return (printf("Error, wrong arguments input !\n"), 1);
 	data->time_to_eat = ft_atoi(argv[3]);
 	if (data->time_to_eat < 60)
-		return (printf("Error, time too short !"), 1);
+		return (printf("Error, wrong arguments input !\n"), 1);
 	data->time_to_sleep = ft_atoi(argv[4]);
 	if (data->time_to_sleep < 60)
-		return (printf("Error, time too short !"), 1);
+		return (printf("Error, wrong arguments input !\n"), 1);
 	if (argc == 6)
 		data->nb_eat = ft_atoi(argv[5]);
 	else
 		data->nb_eat = -1;
+	data->start_time = ft_get_time();
 	return (0);
 }
 
@@ -46,7 +47,7 @@ int main(int argc, char **argv)
 		return (0);
 	data->nb_philo = ft_atoi(argv[1]);
 	if (data->nb_philo < 2)
-		return (printf("Error, time too short !"), 0);
+		return (printf("Error, add more philosophers !\n"), free(data), 0);
 	info = (t_info *)malloc(sizeof(t_info) * data->nb_philo);
 	if (!info)
 		return (0);
@@ -56,14 +57,24 @@ int main(int argc, char **argv)
 	data->philo = malloc(sizeof(pthread_t) * data->nb_philo);
 	if (!data->philo)
 		return (0);
+	while (i < data->nb_philo)
+	{
+		info[i].data = data;
+		info[i].eat_count = 0;
+		info[i].last_eat = ft_get_time();
+		i++; 
+	}
 	if (init_philo(data, info, argc, argv))
 		return (0);
-	while (i < data->nb_philo)
-		info[i++].data = data;
-	
 	pthread_mutex_init(&data->print, NULL);
 	creat_treads(info);
-	pthread_mutex_destroy(data->forks);
-	pthread_mutex_destroy(&data->print);
+	check_death(info);
 	return (0);
 }
+
+//check_atoi_return_value;
+// free(data);
+// free(info);
+// free(data->forks);
+// free(data->philo);
+// fix time
