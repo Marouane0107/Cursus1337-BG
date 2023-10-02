@@ -6,7 +6,7 @@ SRC = philo.c  utils.c  fun_utils.c
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror  -fsanitize=address -g3 -pthread
+CFLAGS = -Wall -Wextra -Werror  #-fsanitize=thread -g3 -pthread 
 
 all: $(Name)
 $(Name): $(OBJ)
@@ -19,4 +19,3 @@ fclean: clean
 	rm -f $(Name)
 
 re: fclean all
-

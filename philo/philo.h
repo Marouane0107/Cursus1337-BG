@@ -12,34 +12,35 @@ typedef struct s_data
 {
 	pthread_mutex_t *forks;
 	pthread_mutex_t	print;
+	pthread_mutex_t check;
 	pthread_t *philo;
-	int	id;
-	int	nb_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	nb_eat;
+	int		id;
+	int		nb_philo;
+	int		time_to_die;
+	int		time_to_eat;
+	int		time_to_sleep;
+	int		nb_eat;
+	int		finish_eat;
 	long	start_time;
 }		t_data;
 
 
 typedef struct s_info
 {
-	int	id;
-	int left_fork;
-	int right_fork;
-	int	last_eat;
-	int eat_count;
-
+	int		id;
+	int		left_fork;
+	int		right_fork;
+	long	last_eat;
+	int		eat_count;
 	t_data	*data;
-
 }		t_info;
 
 int		ft_atoi(char *str);
-int		ft_get_time(void);
+long	ft_get_time(void);
 int		ft_usleep(int time);
 void    take_forks(t_info *info);
 void    eat(t_info *info);
+void    eat_1(t_info *info);
 void    sleep_think(t_info *data);
 void    *routine(void *arg);
 void    creat_treads(t_info *info);
