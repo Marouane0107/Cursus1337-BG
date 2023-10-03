@@ -20,7 +20,6 @@ typedef struct s_data
 	int		time_to_eat;
 	int		time_to_sleep;
 	int		nb_eat;
-	int		finish_eat;
 	long	start_time;
 }		t_data;
 

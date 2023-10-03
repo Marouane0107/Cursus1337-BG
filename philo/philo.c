@@ -6,7 +6,7 @@
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:29:50 by maouzal           #+#    #+#             */
-/*   Updated: 2023/10/02 02:33:29 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/10/03 04:07:19 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ int	init_philo(t_data *data, t_info *info, int argc, char **argv)
 	if (argc == 6)
 	{
 		data->nb_eat = ft_atoi(argv[5]);
-		if (data->nb_eat < 0)
+		if (data->nb_eat <= 0)
 			return (printf("Error, wrong arguments input !\n"), 1);
 	}
 	else
 		data->nb_eat = -1;
-	data->finish_eat = 0;
 	return (0);
 }
 void	init_mutex(t_info *info, t_data *data)
@@ -40,6 +39,7 @@ void	init_mutex(t_info *info, t_data *data)
 	int i;
 
 	i = 0;
+
 	while (i < data->nb_philo)
 	{
 		pthread_mutex_init(&data->forks[i], NULL);

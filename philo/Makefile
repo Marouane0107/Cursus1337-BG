@@ -2,11 +2,11 @@ Name = philo
 
 CC = cc
 
-SRC = philo.c  utils.c  fun_utils.c
+SRC = philo.c  operations.c  fun_utils.c
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror  #-fsanitize=thread -g3 -pthread 
+CFLAGS = -Wall -Wextra -Werror -pthread #-fsanitize=thread #-g3
 
 all: $(Name)
 $(Name): $(OBJ)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 23:35:27 by maouzal           #+#    #+#             */
-/*   Updated: 2023/10/02 02:51:01 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/10/03 04:29:57 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void    eat(t_info *info)
 	pthread_mutex_unlock(&info->data->print);
 	pthread_mutex_lock(&info->data->check);
 	info->eat_count++;
-	if (info->eat_count == info->data->nb_eat)
-		info->data->finish_eat++;
 	info->last_eat = ft_get_time();
 	pthread_mutex_unlock(&info->data->check);
 	ft_usleep(info->data->time_to_eat);
@@ -61,8 +59,6 @@ void    eat_1(t_info *info)
 	pthread_mutex_unlock(&info->data->print);
 	pthread_mutex_lock(&info->data->check);
 	info->eat_count++;
-	if (info->eat_count == info->data->nb_eat)
-		info->data->finish_eat++;
 	info->last_eat = ft_get_time();
 	pthread_mutex_unlock(&info->data->check);
 	ft_usleep(info->data->time_to_eat);
@@ -104,7 +100,7 @@ void    creat_treads(t_info *info)
 		info[i].left_fork = i;
 		info[i].right_fork = (i + 1) % info->data->nb_philo;
 		pthread_create(info[i].data->philo + i, NULL, routine, info + i);
-		usleep(10);
+		usleep(50);
 		i++;
 	}
 }
