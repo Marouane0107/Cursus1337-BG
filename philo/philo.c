@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maouzal <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:29:50 by maouzal           #+#    #+#             */
-/*   Updated: 2023/10/03 04:07:19 by maouzal          ###   ########.fr       */
+/*   Updated: 2023/10/04 03:03:19 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
 int	init_philo(t_data *data, t_info *info, int argc, char **argv)
 {
@@ -34,12 +34,12 @@ int	init_philo(t_data *data, t_info *info, int argc, char **argv)
 		data->nb_eat = -1;
 	return (0);
 }
+
 void	init_mutex(t_info *info, t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
-
 	while (i < data->nb_philo)
 	{
 		pthread_mutex_init(&data->forks[i], NULL);
@@ -52,10 +52,10 @@ void	init_mutex(t_info *info, t_data *data)
 	pthread_mutex_init(&data->check, NULL);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_data *data;
-	t_info *info;
+	t_data	*data;
+	t_info	*info;
 
 	if (argc < 5 || argc > 6)
 		return (0);
@@ -63,16 +63,12 @@ int main(int argc, char **argv)
 	if (!data)
 		return (0);
 	data->nb_philo = ft_atoi(argv[1]);
-	if (data->nb_philo < 2)
+	if (data->nb_philo < 1)
 		return (printf("Error, add more philosophers !\n"), free(data), 0);
 	info = (t_info *)malloc(sizeof(t_info) * data->nb_philo);
-	if (!info)
-		return (0);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
-	if (!data->forks)
-		return (0);
 	data->philo = malloc(sizeof(pthread_t) * data->nb_philo);
-	if (!data->philo)
+	if (!data->philo || !data->forks || !info)
 		return (0);
 	if (init_philo(data, info, argc, argv))
 		return (0);
@@ -81,9 +77,3 @@ int main(int argc, char **argv)
 	check_death(info);
 	return (0);
 }
-
-// free(data);
-// free(info);
-// free(data->forks);
-// free(data->philo);
-// fix time
