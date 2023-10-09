@@ -75,19 +75,27 @@ int	eat_check(t_info *info)
 
 void	*check_death(t_info *info)
 {
+	int	i;
+
+	i = 0;
 	while (1)
 	{
+		if (i == info->data->nb_philo - 1)
+			i = 0;
+		if (info[i].last_eat == 0)
+			info[i].last_eat = ft_get_time();
 		pthread_mutex_lock(&info->data->check);
 		if (eat_check(info))
 			return (NULL);
-		if (ft_get_time() - info->last_eat > info->data->time_to_die)
+		if (ft_get_time() - info[i].last_eat > info->data->time_to_die)
 		{
 			pthread_mutex_lock(&info->data->print);
-			printf("%ld %d ------> has died <--------\n",
+			printf("%ld %d has died \n",
 				(ft_get_time() - info->data->start_time), info->id);
 			pthread_mutex_unlock(&info->data->check);
 			return (NULL);
 		}
+		i++;
 		pthread_mutex_unlock(&info->data->check);
 	}
 }
