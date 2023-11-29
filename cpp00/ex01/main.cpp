@@ -5,6 +5,7 @@
 int main(int ac, char *av[])
 {
 	contact contact;
+	PhoneBook PhoneBook;
 	std::string	command;	
 	int index = 0;
 
@@ -21,12 +22,12 @@ int main(int ac, char *av[])
 		{
 			if (index == 8)
 				index = 0;
-			contact.add_contact(index);
+			PhoneBook.add_contact(index);
 			index ++;
 		}
 		if (command.compare("SEARCH") == 0)
 		{
-			contact.print_view(index);
+			PhoneBook.print_view(index);
 		}
 		else
 			std::cout << "Enter one of this three commands (ADD, SEARCH, EXIT) : " << std::endl;

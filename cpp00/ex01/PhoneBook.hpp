@@ -20,7 +20,7 @@ public:
 	void		setindex(int x) {index = x;}
 	void		setfirst(std::string First) {first_name = First ;}
 	void		setlast(std::string last) {last_name = last ;}
-	void		setn_name(std::string Nickname) {nickname = Nickname ;}
+	void		setnickname(std::string Nickname) {nickname = Nickname ;}
 	void		setphone(std::string Phone) {phone_number = Phone ;}
 	void		setsecret(std::string secret) {darkest_secret = secret ;}
 	std::string	getfirst_name() {return (first_name);}
@@ -28,8 +28,14 @@ public:
 	std::string	getnickname() {return (nickname);}
 	std::string	getdarkest_secret() {return (darkest_secret);}
 	std::string	getphone_number() {return (phone_number);}
-	int			add_contact(int x);
-	void		print_view(int	x);
+};
+
+class PhoneBook
+{
+	public:
+		contact phone[7];
+		int		add_contact(int x);
+		void	print_view(int	x);
 };
 
 #endif

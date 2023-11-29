@@ -2,19 +2,6 @@
 #include <string>
 #include "PhoneBook.hpp"
 
-
-void	contact::print_view(int	x)
-{
-	std::cout << std::setw(10) << "index" << "|" <<
-	std::setw(10) << "first name" << "|" <<
-	std::setw(10) << "last name" << "|" <<
-	std::setw(10) << " nickname" << "|" << std::endl;
-	std::cout << std::setw(10) << "" << "|" <<
-	std::setw(10) << "" << "|" <<
-	std::setw(10) << "" << "|" <<
-	std::setw(10) << "" << "|" << std::endl;
-}
-
 int	is_valid(std::string str)
 {
 	int f = 0;
@@ -38,9 +25,35 @@ int	is_valid(std::string str)
 	return (0);
 }
 
-int contact::add_contact(int x)
+void	PhoneBook::print_view(int	x)
 {
-	contact contact;
+	std::string str;
+	std::cout << std::setw(10) << "index" << "|" <<
+	std::setw(10) << "first name" << "|" <<
+	std::setw(10) << "last name" << "|" <<
+	std::setw(10) << " nickname" << "|" << std::endl;
+	std::cout << std::setw(10) << "----------" << "|" <<
+	std::setw(10) << "----------" << "|" <<
+	std::setw(10) << "----------" << "|" <<
+	std::setw(10) << "----------" << "|" << std::endl;
+	for(int i = 0; i < x; i++)
+	{
+		std::cout << std::setw(10) << i << "|" ;
+		if (phone[i].getfirst_name().size() >= 10 )
+		{
+			str = phone[i].getfirst_name().substr(0,9);
+			str.append(".");
+		}
+		//from here
+		std::cout << std::setw(10) << str << "|" <<
+		std::setw(10) << phone[i].getlast_name() << "|" <<
+		std::setw(10) << phone[i].getnickname() << "|" << std::endl;
+	}
+	///need to finish the condition above
+}
+
+int PhoneBook::add_contact(int x)
+{
 	std::string first_name;
 	std::string last_name;
 	std::string nickname;
@@ -67,11 +80,14 @@ int contact::add_contact(int x)
 	getline(std::cin, darkest_secret);
 	if (is_valid(darkest_secret))
 		return (1);
-	contact.index = x;
-	contact.first_name = first_name;
-	contact.last_name = last_name;
-	contact.nickname = nickname;
-	contact.phone_number = phone_number;
-	contact.darkest_secret = darkest_secret;
+	phone[x].setindex(x);
+	phone[x].setfirst(first_name);
+	phone[x].setlast(last_name);
+	phone[x].setnickname(nickname);
+	phone[x].setphone(phone_number);
+	phone[x].setsecret(darkest_secret);
 	return (0);
 }
+
+//appand
+//substr
