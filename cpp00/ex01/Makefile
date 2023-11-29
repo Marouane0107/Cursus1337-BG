@@ -4,7 +4,7 @@ CXX = c++
 
 CXXFLAG = -Wall -Wextra -Werror -std=c++98
 
-SRC = PhoneBook.cpp contacts.cpp 
+SRC = PhoneBook.cpp main.cpp 
 
 OBJ = $(SRC:.cpp=.o)
 
