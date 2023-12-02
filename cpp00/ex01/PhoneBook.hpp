@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <sstream>
 
 class contact
 {
@@ -23,6 +24,7 @@ public:
 	void		setnickname(std::string Nickname) {nickname = Nickname ;}
 	void		setphone(std::string Phone) {phone_number = Phone ;}
 	void		setsecret(std::string secret) {darkest_secret = secret ;}
+	int			getindex() {return (index);}
 	std::string	getfirst_name() {return (first_name);}
 	std::string	getlast_name() {return (last_name);}
 	std::string	getnickname() {return (nickname);}
@@ -32,10 +34,12 @@ public:
 
 class PhoneBook
 {
-	public:
+	private:
 		contact phone[7];
+	public:
 		int		add_contact(int x);
-		void	print_view(int	x);
+		void	print_view(int	x, int	count);
+		int		get_info(int index);
 };
 
 #endif

@@ -1,32 +1,46 @@
-#include <iostream>
-#include <string>
+
 #include "PhoneBook.hpp"
 
-int	is_valid(std::string str)
+int	is_valid(std::string str, int c)
 {
 	int f = 0;
 	int	j = 0;
-	for(int i = 0; str[i]; i++)
+	if (c == 1 || c == 2)
 	{
-		f = isprint(str[i]);
-		if (f == 0)
+		for(int i = 0; str[i]; i++)
+		{
+			f = isprint(str[i]);
+			if (f == 0)
+			{
+				std::cout <<" Invalid information !!"<<std::endl;
+				return (1);
+			}
+			if (str[i] == ' ')
+				j++;
+		}
+		if (j == str.length())
 		{
 			std::cout <<" Invalid information !!"<<std::endl;
-			return (1);
+				return (1);
 		}
-		if (str[i] == ' ')
-			j++;
 	}
-	if (j == str.length())
+	if (c == 2)
 	{
-		std::cout <<" Invalid information !!"<<std::endl;
-			return (1);
+		for(int i = 0; i < str.length(); i++)
+		{
+			if (str[i] < '0' || str[i] > '9')
+			{
+				std::cout <<" Invalid input !!"<<std::endl;
+				return (1);
+			}
+		}	
 	}
 	return (0);
 }
 
-void	PhoneBook::print_view(int	x)
+void	PhoneBook::print_view(int	x, int	count)
 {
+	int index = x;
 	std::string str;
 	std::cout << std::setw(10) << "index" << "|" <<
 	std::setw(10) << "first name" << "|" <<
@@ -36,20 +50,59 @@ void	PhoneBook::print_view(int	x)
 	std::setw(10) << "----------" << "|" <<
 	std::setw(10) << "----------" << "|" <<
 	std::setw(10) << "----------" << "|" << std::endl;
-	for(int i = 0; i < x; i++)
+	for(int i = 0; i < count; i++)
 	{
 		std::cout << std::setw(10) << i << "|" ;
-		if (phone[i].getfirst_name().size() >= 10 )
+		str = phone[i].getfirst_name();
+		if (phone[i].getfirst_name().size() > 10 )
 		{
 			str = phone[i].getfirst_name().substr(0,9);
 			str.append(".");
 		}
-		//from here
-		std::cout << std::setw(10) << str << "|" <<
-		std::setw(10) << phone[i].getlast_name() << "|" <<
-		std::setw(10) << phone[i].getnickname() << "|" << std::endl;
+		std::cout << std::setw(10) << str << "|" ;
+		str = phone[i].getlast_name();
+		if (phone[i].getlast_name().size() > 10 )
+		{
+			str = phone[i].getlast_name().substr(0,9);
+			str.append(".");
+		}
+		std::cout << std::setw(10) << str << "|";
+		str = phone[i].getnickname();
+		if (phone[i].getnickname().size() >=10 )
+		{
+			str = phone[i].getnickname().substr(0,9);
+			str.append(".");
+		}
+		std::cout << std::setw(10) << phone[i].getnickname() << "|" << std::endl;
 	}
-	///need to finish the condition above
+}
+
+int	PhoneBook::get_info(int index)
+{
+	int	x;
+	std::string	input;
+
+	if (std::cin.eof())
+		exit(0);
+	std::cout << "Enter index : ";
+	getline(std::cin, input) ;
+	if (is_valid(input, 2) != 0)
+	{
+		return (1);
+	}
+	std::istringstream iss(input);
+	iss >> x;
+	if (x >= index || x < 0)
+	{
+		std::cout << " Invalid index !!" <<std::endl;
+		return (1);
+	}
+	std::cout << "first name : " << phone[x].getfirst_name() << std::endl;
+	std::cout << "last name : " << phone[x].getlast_name() << std::endl;
+	std::cout << "nickname : " << phone[x].getnickname() << std::endl;
+	std::cout << "phone number : " << phone[x].getphone_number() << std::endl;
+	std::cout << "darkest secret : " << phone[x].getdarkest_secret() << std::endl;
+	return (0);
 }
 
 int PhoneBook::add_contact(int x)
@@ -60,25 +113,27 @@ int PhoneBook::add_contact(int x)
 	std::string phone_number;
 	std::string darkest_secret;
 
+	if (std::cin.eof())
+		exit(0);
 	std::cout <<" first_name : "; 
 	getline(std::cin, first_name);
-	if (is_valid(first_name))
+	if (is_valid(first_name, 1))
 		return (1);
 	std::cout <<" last_name : "; 
 	getline(std::cin, last_name);
-	if (is_valid(last_name))
+	if (is_valid(last_name, 1))
 		return (1);
 	std::cout <<" nickname : "; 
 	getline(std::cin, nickname);
-	if (is_valid(nickname))
+	if (is_valid(nickname, 1))
 		return (1);
 	std::cout <<" phone_number : "; 
 	getline(std::cin, phone_number);
-	if (is_valid(phone_number))
+	if (is_valid(phone_number, 1))
 		return (1);
 	std::cout <<" darkest_secret : "; 
 	getline(std::cin, darkest_secret);
-	if (is_valid(darkest_secret))
+	if (is_valid(darkest_secret, 1))
 		return (1);
 	phone[x].setindex(x);
 	phone[x].setfirst(first_name);
@@ -88,6 +143,3 @@ int PhoneBook::add_contact(int x)
 	phone[x].setsecret(darkest_secret);
 	return (0);
 }
-
-//appand
-//substr

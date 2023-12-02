@@ -1,5 +1,4 @@
-#include <iostream>
-#include <string>
+
 #include "PhoneBook.hpp"
 
 int main(int ac, char *av[])
@@ -8,6 +7,7 @@ int main(int ac, char *av[])
 	PhoneBook PhoneBook;
 	std::string	command;	
 	int index = 0;
+	int	count = 0;
 
 	if (ac != 1)
 		return(1);
@@ -22,12 +22,33 @@ int main(int ac, char *av[])
 		{
 			if (index == 8)
 				index = 0;
-			PhoneBook.add_contact(index);
-			index ++;
+			while (1)
+			{
+				if (!PhoneBook.add_contact(index))
+				{
+					index ++;
+					if (count < 8)
+						count++;
+					break;
+				}
+			}
 		}
 		if (command.compare("SEARCH") == 0)
 		{
-			PhoneBook.print_view(index);
+			PhoneBook.print_view(index, count);
+			if (index > 0)
+			{
+				while(1)
+				{
+					if (!PhoneBook.get_info(index))
+						break;
+				}
+			}
+			else
+			{
+				std::cout << "There is no contact to see ! ->use 'ADD' and try again ;)" << std::endl;
+				std::cout << "Enter one of this three commands (ADD, SEARCH, EXIT) : " << std::endl;
+			}
 		}
 		else
 			std::cout << "Enter one of this three commands (ADD, SEARCH, EXIT) : " << std::endl;
