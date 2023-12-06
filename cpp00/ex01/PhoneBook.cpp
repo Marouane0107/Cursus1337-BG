@@ -68,12 +68,12 @@ void	PhoneBook::print_view(int	x, int	count)
 		}
 		std::cout << std::setw(10) << str << "|";
 		str = phone[i].getnickname();
-		if (phone[i].getnickname().size() >=10 )
+		if (phone[i].getnickname().size() > 10 )
 		{
 			str = phone[i].getnickname().substr(0,9);
 			str.append(".");
 		}
-		std::cout << std::setw(10) << phone[i].getnickname() << "|" << std::endl;
+		std::cout << std::setw(10) << str << "|" << std::endl;
 	}
 }
 

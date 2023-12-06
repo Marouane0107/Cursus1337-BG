@@ -11,7 +11,7 @@ int main(int ac, char *av[])
 
 	if (ac != 1)
 		return(1);
-	std::cout << "Enter one of the three commands (ADD, SEARCH, EXIT) : " << std::endl;
+	std::cout << "Enter one of the three commands (ADD, SEARCH, EXIT) : " ;
 	while (getline(std::cin, command))
 	{
 		if (command.compare("EXIT") == 0)
@@ -41,16 +41,19 @@ int main(int ac, char *av[])
 				while(1)
 				{
 					if (!PhoneBook.get_info(index))
+					{
+						std::cout << "Enter one of this three commands (ADD, SEARCH, EXIT) : " ;
 						break;
+					}
 				}
 			}
 			else
 			{
 				std::cout << "There is no contact to see ! ->use 'ADD' and try again ;)" << std::endl;
-				std::cout << "Enter one of this three commands (ADD, SEARCH, EXIT) : " << std::endl;
+				std::cout << "Enter one of this three commands (ADD, SEARCH, EXIT) : " ;
 			}
 		}
 		else
-			std::cout << "Enter one of this three commands (ADD, SEARCH, EXIT) : " << std::endl;
+			std::cout << "Enter one of this three commands (ADD, SEARCH, EXIT) : " ;
 	}
 }
