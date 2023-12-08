@@ -1,11 +1,10 @@
-
-NAME = Zombie
+NAME = BRAIN
 
 CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address
 
-SRC = main.cpp zombieHorde.cpp Zombie.cpp 
+SRC = main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -17,9 +16,9 @@ $(NAME): $(OBJ)
 clean :
 		@rm -f $(OBJ)
 
-fclean : clean
+fclean :	clean
 		@rm -f $(NAME)
 
-re : fclean all
+re :	fclean all
 
-.PHONY : all clean fclean re 
+.PHONY :	all clean fclean re
