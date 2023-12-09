@@ -2,7 +2,7 @@
 
 HumanB::HumanB(std::string name)
 {
-
+	this->name = name;
 }
 
 void    HumanB::attack()
