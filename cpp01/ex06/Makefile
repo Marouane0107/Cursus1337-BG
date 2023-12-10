@@ -1,10 +1,10 @@
-NAME = Replacing
+NAME = HarlFilter
 
 CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g3
 
-SRC = main.cpp
+SRC = main.cpp Harl.cpp 
 
 OBJ = $(SRC:.cpp=.o)
 

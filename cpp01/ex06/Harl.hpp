@@ -17,6 +17,7 @@ class Harl
 	public:
 
 		void	complain( std::string level );
+		int		get_lvl(std::string level);
 };
 
 
