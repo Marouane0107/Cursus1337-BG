@@ -6,11 +6,15 @@ int main(int ac, char *av[])
 	contact contact;
 	PhoneBook PhoneBook;
 	std::string	command;	
+	(void)(av);
 	int index = 0;
 	int	count = 0;
 
 	if (ac != 1)
+	{
+		std::cout << "Invalid number of argument !!" << std::endl;
 		return(1);
+	}
 	std::cout << "Enter one of the three commands (ADD, SEARCH, EXIT) : " ;
 	while (getline(std::cin, command))
 	{
@@ -35,7 +39,7 @@ int main(int ac, char *av[])
 		}
 		if (command.compare("SEARCH") == 0)
 		{
-			PhoneBook.print_view(index, count);
+			PhoneBook.print_view(count);
 			if (index > 0)
 			{
 				while(1)

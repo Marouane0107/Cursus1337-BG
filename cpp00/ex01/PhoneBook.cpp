@@ -3,8 +3,8 @@
 
 int	is_valid(std::string str, int c)
 {
-	int f = 0;
-	int	j = 0;
+	int 	f = 0;
+	size_t	j = 0;
 	if (c == 1 || c == 2)
 	{
 		for(int i = 0; str[i]; i++)
@@ -26,7 +26,7 @@ int	is_valid(std::string str, int c)
 	}
 	if (c == 2)
 	{
-		for(int i = 0; i < str.length(); i++)
+		for(size_t i = 0; i < str.length(); i++)
 		{
 			if (str[i] < '0' || str[i] > '9')
 			{
@@ -38,9 +38,8 @@ int	is_valid(std::string str, int c)
 	return (0);
 }
 
-void	PhoneBook::print_view(int	x, int	count)
+void	PhoneBook::print_view(int	count)
 {
-	int index = x;
 	std::string str;
 	std::cout << std::setw(10) << "index" << "|" <<
 	std::setw(10) << "first name" << "|" <<

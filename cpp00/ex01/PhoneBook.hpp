@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <cstdlib>
 #include <sstream>
 
 class contact
@@ -38,7 +39,7 @@ class PhoneBook
 		contact phone[7];
 	public:
 		int		add_contact(int x);
-		void	print_view(int	x, int	count);
+		void	print_view(int	count);
 		int		get_info(int index);
 };
 
