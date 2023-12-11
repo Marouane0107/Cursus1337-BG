@@ -1,11 +1,19 @@
 #include "HumanB.hpp"
 
-HumanB::HumanB(std::string Name)
+HumanB::HumanB(std::string Name) : weapon(NULL)
 {
 	name = Name;
 }
 
+HumanB::~HumanB()
+{
+
+}
+
 void    HumanB::attack()
 {
-	std::cout << name << " attacks with their " << weapon->getType() << std::endl;
+	if (!weapon)
+		std::cout << name << " attacks with their " << "Fist" << std::endl;
+	else
+		std::cout << name << " attacks with their " << weapon->getType() << std::endl;
 }

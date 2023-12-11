@@ -14,6 +14,7 @@ class HumanB
 	public:
 
 		HumanB(std::string name);
+		~HumanB();
         void    setWeapon(Weapon &weapon){this->weapon = &weapon;}
 		void    attack();
 };
