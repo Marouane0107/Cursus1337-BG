@@ -12,7 +12,7 @@ int	is_valid(std::string str, int c)
 			f = isprint(str[i]);
 			if (f == 0)
 			{
-				std::cout <<" Invalid information !!"<<std::endl;
+				std::cout <<" Are you serious? ( Try again using valid input ) "<<std::endl;
 				return (1);
 			}
 			if (str[i] == ' ')
@@ -96,11 +96,13 @@ int	PhoneBook::get_info(int index)
 		std::cout << " Invalid index !!" <<std::endl;
 		return (1);
 	}
+	std::cout << "-------------------------------------------------- " << std::endl;
 	std::cout << "first name : " << phone[x].getfirst_name() << std::endl;
 	std::cout << "last name : " << phone[x].getlast_name() << std::endl;
 	std::cout << "nickname : " << phone[x].getnickname() << std::endl;
 	std::cout << "phone number : " << phone[x].getphone_number() << std::endl;
 	std::cout << "darkest secret : " << phone[x].getdarkest_secret() << std::endl;
+	std::cout << "-------------------------------------------------- " << std::endl;
 	return (0);
 }
 
@@ -140,5 +142,6 @@ int PhoneBook::add_contact(int x)
 	phone[x].setnickname(nickname);
 	phone[x].setphone(phone_number);
 	phone[x].setsecret(darkest_secret);
+	std::cout << " ****** Your contact has been added successfully ****** " << std::endl;
 	return (0);
 }
