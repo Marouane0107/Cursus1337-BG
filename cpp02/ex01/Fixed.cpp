@@ -23,7 +23,7 @@ Fixed::Fixed(const int i)
 Fixed::Fixed(const float f)
 {
 	std::cout << "Float constructor called "<<std::endl;
-	float rounded_value = roundf((f *(1 << fractional_bits)));
+	float rounded_value = roundf(f * (1 << (fractional_bits)));
 	int i = static_cast<int>(rounded_value);
 	fixed = i;
 }
@@ -33,7 +33,7 @@ Fixed &Fixed:: operator=(const Fixed& c)
 	std::cout << "Copy assignment operator called "<<std::endl;
 	if(this != &c)
 	{
-		fixed = c.getRawBits();
+		fixed = c.fixed;
 	}
 	return (*this);
 }
@@ -67,6 +67,6 @@ int Fixed::toInt( void ) const
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed_point)
 {
-	os << fixed_point.getRawBits();
+	os << fixed_point.toFloat();
 	return (os);
 }
