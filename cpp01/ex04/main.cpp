@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 
+
 std::string    new_line(std::string line, std::string s1, std::string s2)
 {
 	std::string	new_line;
