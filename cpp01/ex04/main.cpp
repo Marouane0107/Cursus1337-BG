@@ -5,31 +5,14 @@
 
 std::string    new_line(std::string line, std::string s1, std::string s2)
 {
-	std::string	new_line;
-	size_t		x = 0;
-	size_t		n = 0;
+	size_t		pos = 0;
 
-	for (size_t i = 0; i < line.length(); i++)
+	while ((pos = line.find(s1, pos)) != std::string::npos)
 	{
-		n = 0;
-		if (line[i] == s1[n])
-		{
-			x = i;
-			while(n < s1.length() && x < line.length() && line[x] == s1[n])
-			{
-				x++;
-				n++;
-			}
-			if (n == s1.size())
-			{
-				new_line += s2;
-				n = 0;
-				i = x;
-			}
-		}
-		new_line += line[i];
+		line = line.substr(0, pos) + s2 + line.substr(pos + s1.length());
+		pos += s2.length();
 	}
-	return (new_line);
+	return (line);
 }
 
 int main(int ac, char* av[])
