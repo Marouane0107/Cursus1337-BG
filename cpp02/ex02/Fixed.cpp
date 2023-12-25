@@ -11,7 +11,7 @@ Fixed::Fixed()
 Fixed::Fixed(const Fixed &o)
 {
 	//std::cout << "Copy constructor called "<<std::endl;
-	this->RawBits = o.RawBits;
+	*this = o;
 }
 
 
@@ -63,11 +63,6 @@ Fixed& Fixed::operator=(const Fixed& o)
 	return (*this);
 }
 
-// std::ostream& operator<<(std::ostream os,const Fixed& raw)
-// {
-// 	os << raw.toFloat();
-// 	return (os);
-// }
 
 /*******Comparison operators: >, <, >=, <=, == and !=  ********/
 
@@ -136,6 +131,8 @@ Fixed	Fixed::operator*(const Fixed& c)
 
 Fixed	Fixed::operator/(const Fixed& c)
 {
+	if (c.RawBits == 0)
+		return (0);
 	this->RawBits /= c.RawBits / (1 << fractional_bits);
 	return (*this);
 }
