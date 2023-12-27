@@ -2,7 +2,6 @@
 #include <string>
 #include <fstream>
 
-
 std::string    new_line(std::string line, std::string s1, std::string s2)
 {
 	size_t		pos = 0;
@@ -32,7 +31,7 @@ int main(int ac, char* av[])
 		std::string out = infile + ".replace";
 		std::ofstream outfile(out.c_str());
 		if (!outfile.is_open())
-		{
+		{ 
 			std::cout << " Error in opening outfile !!" << std::endl;
 			return (1);
 		}

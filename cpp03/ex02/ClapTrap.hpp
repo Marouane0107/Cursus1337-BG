@@ -16,7 +16,10 @@ class ClapTrap
 
 	public:
 
+		ClapTrap();
 		ClapTrap(std::string Name);
+		ClapTrap(const ClapTrap& o);
+		ClapTrap& operator =(const ClapTrap& o);
 		~ClapTrap();
 		void	attack(const std::string& target);
 		void	beRepaired(unsigned int amount);

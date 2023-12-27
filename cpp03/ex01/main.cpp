@@ -9,6 +9,7 @@ int main()
 
 	ScavTrap scavtrap("SCV-TP");
 	scavtrap.attack("Enemy2");
+	scavtrap.takeDamage(50);
 	scavtrap.guardGate();
 
 	return 0;

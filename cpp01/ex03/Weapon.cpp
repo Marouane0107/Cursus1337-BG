@@ -9,3 +9,13 @@ Weapon::~Weapon()
 {
 
 }
+
+void	Weapon::setType(std::string Type)
+{
+    type = Type;
+}
+
+const std::string&	Weapon::getType(void) const
+{
+    return (type);
+}

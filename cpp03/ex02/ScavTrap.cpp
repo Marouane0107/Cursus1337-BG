@@ -1,5 +1,26 @@
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap(): ClapTrap()
+{
+	std::cout << "ScavTrap defult constructor called " << std::endl;
+}
+
+ScavTrap::ScavTrap(const ScavTrap& o)
+{
+	std::cout << "ScavTrap copy constructor called " << std::endl;
+	*this = o;
+}
+
+ScavTrap& ScavTrap::operator=(const ScavTrap& o)
+{
+	std::cout << "ScavTrap copy assignment called " << std::endl;
+	if(this != &o)
+	{
+		this->name = o.name;
+	}
+	return (*this);
+}
+
 ScavTrap::ScavTrap(std::string Name) : ClapTrap(Name)
 {
     Hit_points = 100;

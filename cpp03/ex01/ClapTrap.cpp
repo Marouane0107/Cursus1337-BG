@@ -1,8 +1,31 @@
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap()
+{
+	std::cout << "ClapTrap default constructor called " << std::endl;
+}
+
 ClapTrap::ClapTrap(std::string name): Name(name) , Hit_points(10), Energy_points(10), Attack_damage(0)
 {
 	std::cout << "ClapTrap " << Name << " is created!" << std::endl;
+}
+
+ClapTrap::ClapTrap(const ClapTrap& o)
+{
+	std::cout << "ClapTrap copy constructor called " << std::endl;
+	*this = o;
+}
+
+ClapTrap& ClapTrap:: operator =(const ClapTrap& o)
+{
+	std::cout << "ClapTrap copy assignment called " << std::endl;
+	if(this != &o)
+	{
+		this->Energy_points = o.Energy_points;
+		this->Hit_points = o.Hit_points;
+		this->Attack_damage = o.Attack_damage;
+	}
+	return (*this);
 }
 
 ClapTrap::~ClapTrap()
@@ -22,12 +45,6 @@ void ClapTrap::attack(const std::string& target)
 }
 void    ClapTrap::takeDamage(unsigned int amount)
 {
-	int save = amount;
-	if (save < 0)
-	{
-		std::cout << "Damage amount can't be negative" << std::endl;
-		return;
-	}
 	if (Hit_points > 0)
 	{
 		if (amount >= Hit_points)
@@ -46,12 +63,7 @@ void    ClapTrap::takeDamage(unsigned int amount)
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	int save = amount;
-	if (save < 0)
-	{
-		std::cout << "Repaired amount can't be negative" << std::endl;
-		return;
-	}
+
 	if (Hit_points > 0 && Energy_points > 0)
 	{
 		Hit_points += amount;

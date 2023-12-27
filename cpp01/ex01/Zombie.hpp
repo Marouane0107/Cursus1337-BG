@@ -10,12 +10,12 @@ class Zombie
 {
 private:
 
-	std::string name;
+	std::string	name;
 public:
 
 	~Zombie();
 	void	announce(void);
-    void    setname(std::string Name) {name = Name;}
+    void    setname(std::string Name);
 };
 
 Zombie* zombieHorde( int N, std::string name );
