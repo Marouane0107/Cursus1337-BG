@@ -12,8 +12,11 @@ class Dog : public Animal
 		Brain *brain;
 	public:
 		Dog();
+		Dog(const Dog& o);
+		Dog& operator=(const Dog& o);
 		~Dog();
 		void	makeSound() const;
+		Brain*	getbrain(void) const;
 };
 
 

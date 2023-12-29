@@ -12,6 +12,8 @@ class WrongAnimal
 	public:
 
 		WrongAnimal();
+		WrongAnimal(const WrongAnimal& o);
+		WrongAnimal& operator=(const WrongAnimal& o);
 		~WrongAnimal();
 		virtual void	makeSound() const;
 };

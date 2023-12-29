@@ -2,10 +2,10 @@
 
 int main() 
 {
-	ClapTrap claptrap("Mar-1");
-	claptrap.attack("Enemy");
-	claptrap.takeDamage(5);
-	claptrap.beRepaired(2);
+	ClapTrap a("Mar-1");
+	a.attack("Enemy");
+	a.takeDamage(5);
+	a.beRepaired(2);
 
 	return 0;
 }

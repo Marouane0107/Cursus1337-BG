@@ -19,6 +19,7 @@
 
 int main()
 {
+
 	A_Animal *animals[4] = {new Dog(), new Dog(), new Cat(), new Cat()};
 
 	for(int i = 0; i < 4; i++)
@@ -32,3 +33,4 @@ int main()
 	}
 	return 0;
 }
+

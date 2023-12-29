@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 class A_Animal
 {
@@ -11,6 +12,8 @@ class A_Animal
 
 	public:
 		A_Animal();
+		A_Animal(const A_Animal& o);
+		A_Animal& operator=(const A_Animal& o);
 		virtual	~A_Animal();
 		virtual void	makeSound() const = 0;
 		std::string		getType() const;
