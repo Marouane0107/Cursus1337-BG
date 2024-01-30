@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 02:48:24 by maouzal           #+#    #+#             */
-/*   Updated: 2023/05/17 07:50:01 by maouzal          ###   ########.fr       */
+/*   Updated: 2024/01/30 06:22:48 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,15 @@ void	ft_free(char **str)
 	}
 }
 
-void	is_sorted(t_stack **a)
+void	is_sorted(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
 
+	if (*b)
+	{
+		write(1, "KO\n", 3);
+		exit(0);
+	}
 	if (!(*a))
 		return ;
 	tmp = (*a);

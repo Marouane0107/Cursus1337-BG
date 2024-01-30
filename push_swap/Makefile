@@ -6,7 +6,7 @@
 #    By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/02 07:19:51 by maouzal           #+#    #+#              #
-#    Updated: 2023/05/17 10:04:00 by maouzal          ###   ########.fr        #
+#    Updated: 2024/01/30 06:12:39 by maouzal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME2 = checker
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
 SRC = push_swap.c	parsing.c	utils.c	linked_list.c	operations_push.c	\
 	operations_rotat.c	operations_swap.c	operations_rev_rotat.c	small_sort.c	\

@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 03:56:40 by maouzal           #+#    #+#             */
-/*   Updated: 2023/02/26 17:19:54 by maouzal          ###   ########.fr       */
+/*   Updated: 2024/01/28 16:26:15 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	check_map_size(t_data *p)
 	j = 0;
 	first_len = ft_strlen(p->map[i]);
 	i += 1;
-	while (p->map[i] != '\0')
+	while (p->map[i])
 	{
 		if (first_len != ft_strlen(p->map[i]))
 		{
@@ -43,7 +43,7 @@ int	check_map_dimension(t_data *p)
 	i = 0;
 	j = 0;
 	x = 0;
-	while (p->map[i] != '\0')
+	while (p->map[i])
 		i++;
 	while (p->map[x])
 	{

@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 01:25:43 by maouzal           #+#    #+#             */
-/*   Updated: 2023/05/17 10:04:33 by maouzal          ###   ########.fr       */
+/*   Updated: 2024/01/30 05:44:54 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	check_arg(int argc, char *argv[], t_vr *p)
 {
 	if (argc < 2)
+		exit(0);
+	if (argc == 2 && !*argv[1])
 		exit(0);
 	check_numbers(argv, p);
 	is_daplicate(p);

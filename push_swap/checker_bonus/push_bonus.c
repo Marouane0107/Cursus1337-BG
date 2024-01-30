@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 05:15:54 by maouzal           #+#    #+#             */
-/*   Updated: 2023/05/17 05:16:09 by maouzal          ###   ########.fr       */
+/*   Updated: 2024/01/30 06:17:58 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	push_a(t_stack **stack_a, t_stack **stack_b)
 	(*stack_b) = (*stack_b)->next;
 	tmp->next = (*stack_a);
 	(*stack_a) = tmp;
-	write(1, "pa\n", 3);
 }
 
 void	push_b(t_stack **stack_a, t_stack **stack_b)
@@ -50,5 +49,4 @@ void	push_b(t_stack **stack_a, t_stack **stack_b)
 	(*stack_a) = (*stack_a)->next;
 	tmp->next = (*stack_b);
 	(*stack_b) = tmp;
-	write(1, "pb\n", 3);
 }

@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 02:24:10 by maouzal           #+#    #+#             */
-/*   Updated: 2023/05/17 10:00:51 by maouzal          ###   ########.fr       */
+/*   Updated: 2024/01/30 06:21:33 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ int	main(int ac, char *av[])
 		line = get_next_line(0);
 	}
 	free(line);
-	is_sorted(&stack_a);
+	is_sorted(&stack_a, &stack_b);
 	return (0);
 }

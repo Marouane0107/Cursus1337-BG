@@ -6,7 +6,7 @@
 /*   By: maouzal <maouzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 02:24:48 by maouzal           #+#    #+#             */
-/*   Updated: 2023/05/17 06:17:29 by maouzal          ###   ########.fr       */
+/*   Updated: 2024/01/30 06:21:52 by maouzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			is_daplicate(t_vr *p);
 void			is_digit(char *str);
 void			check_int(char *str);
 void			check_sign(char *str);
-void			is_sorted(t_stack **a);
+void			is_sorted(t_stack **a, t_stack **b);
 void			push_to_stack_a(t_stack **stack_a, t_vr *p);
 void			erray_alloction(char *argv[], t_vr *p);
 void			swap_a(t_stack *stack_a);
