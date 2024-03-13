@@ -2,10 +2,9 @@ version: '3'
 
 services:
 
-  
   mariadb:
     container_name: mariadb
-    image: mariadb
+    image: mariadb:1
     build: ./requirements/mariadb
     env_file:
       - .env
@@ -24,7 +23,7 @@ services:
   
   wordpress:
     container_name: wordpress
-    image: wordpress
+    image: wordpress:1
     build: ./requirements/wordpress
     env_file:
       - .env
@@ -41,7 +40,7 @@ services:
 
   nginx:
     container_name: nginx
-    image: nginx
+    image: nginx:1
     ports:
       - "443:443"
     build: ./requirements/nginx
