@@ -22,11 +22,10 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &o
     return *this;
 }
 
-RobotomyRequestForm::~RobotomyRequestForm()
-{
+RobotomyRequestForm::~RobotomyRequestForm(){
 }
 
-const void RobotomyRequestForm::execute(Bureaucrat const &executor)
+void    RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
     AForm::execute(executor);
     std::cout << "*drilling noises*" << std::endl;

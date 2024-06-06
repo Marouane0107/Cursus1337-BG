@@ -2,7 +2,7 @@
 #define ROBOTOMYREQUESTFORM_HPP
 
 #include "AForm.hpp"
-
+#include <cstdlib>
 class RobotomyRequestForm: public AForm
 {
     private:
@@ -12,7 +12,7 @@ class RobotomyRequestForm: public AForm
         RobotomyRequestForm(std::string target);
         RobotomyRequestForm(RobotomyRequestForm const &o);
         RobotomyRequestForm &operator=(RobotomyRequestForm const &o);
-        const void execute(Bureaucrat const &executor);
+        void    execute(Bureaucrat const &executor) const;
         ~RobotomyRequestForm();
 };
 

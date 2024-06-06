@@ -18,14 +18,14 @@ class AForm
 		AForm();
 		AForm(std::string name, int gradeToSigned, int gradeToExecute);
 		AForm(AForm const &o);
-		~AForm();
+		virtual ~AForm();
 		AForm &operator=(AForm const &o);
 		std::string getName() const;
 		int		getGradeToSigned() const;
 		int		getGradeToExecute() const;
 		bool	isSigned() const;
 		void	beSigned(Bureaucrat &bureaucrat);
-		virtual const void	execute(Bureaucrat const &executor) = 0;
+		virtual void	execute(Bureaucrat const &executor) const = 0;
 		class GradeTooLowException: public std::exception
 		{
 			public:
