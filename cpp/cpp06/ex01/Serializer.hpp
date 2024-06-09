@@ -7,16 +7,17 @@
 #include <cstdlib>
 #include <stdint.h>
 
-typedef struct Data{
-	int a;
-	Data():a(5){};
+struct Data{
+	int			num;
+	std::string	str;
 };
 
 class Serializer{
-	public:
+	private:
 		Serializer();
-		~Serializer();
 		Serializer(Serializer const &o);
+	public:
+		~Serializer();
 		Serializer &operator=(Serializer const &o);
 		static	uintptr_t serialize(Data* ptr);
 		static	Data* deserialize(uintptr_t raw);
