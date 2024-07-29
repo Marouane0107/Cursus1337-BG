@@ -5,19 +5,18 @@
 #include <string>
 
 template <typename T>
-void    iter(T *address, size_t length, void (*fun)(T &))
+void    iter(T *Address, size_t size, void (*fun)(T const &))
 {
-	for(size_t i = 0; i < length; i++)
-	{
-		fun(address[i]);
-	}
+    for(size_t i = 0; i < size; i++)
+    {
+        fun(Address[i]);
+    }
 }
 
 template <typename T>
-
-void	print(T &i)
+void    print(T const &i)
 {
-	std::cout << i << std::endl;
+    std::cout << i << std::endl;
 }
 
 #endif

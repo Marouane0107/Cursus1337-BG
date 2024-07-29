@@ -1,12 +1,12 @@
-#ifndef WHATEVE_HPP
-#define WHATEVE_HPP
+#ifndef WHATEVER_HPP
+#define WHATEVER_HPP
 
 #include <iostream>
 #include <string>
-#include <cstdlib>
+#include <exception>
 
 template <typename T>
-void swap(T &a, T &b)
+void    swap(T &a, T &b)
 {
 	T tmp = a;
 	a = b;
@@ -14,13 +14,13 @@ void swap(T &a, T &b)
 }
 
 template <typename T>
-T	max(T a, T b)
+T	max(T const a, T const b)
 {
 	return (a > b ? a : b);
 }
 
 template <typename T>
-T	min(T a, T b)
+T	min(T const a, T const b)
 {
 	return (a < b ? a : b);
 }
